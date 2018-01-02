@@ -31,6 +31,17 @@ android {
         }
     }
 
+    sourceSets{
+        main{
+            if (isUserModule.toBoolean()) {
+                manifest.srcFile'src/main/release/AndroidManifest.xml'
+            } else {
+                manifest.srcFile'src/main/debug/AndroidManifest.xml'
+            }
+        }
+    }
+
+
 }
 
 dependencies {
@@ -41,6 +52,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation project(':Provider')
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 repositories {
     mavenCentral()
