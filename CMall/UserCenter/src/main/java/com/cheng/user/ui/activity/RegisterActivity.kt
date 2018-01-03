@@ -8,6 +8,14 @@ import com.cheng.user.presenter.view.RegisterView
 import kotlinx.android.synthetic.main.activity_register.*
 import org.jetbrains.anko.toast
 
+/**
+ * User: wangzecheng (514118702@qq.com)
+ * Date: 2018-01-03
+ * Time: 17:37
+ * Describe:注册页
+ */
+
+
 class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
 
     override fun onSucceed(code: Int) {
