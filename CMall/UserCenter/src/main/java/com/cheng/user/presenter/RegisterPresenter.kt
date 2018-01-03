@@ -1,7 +1,10 @@
 package com.cheng.user.presenter
 
+import com.cheng.baselibrary.ext.execute
 import com.cheng.baselibrary.presenter.BasePresenter
+import com.cheng.baselibrary.rx.BaseSubscriber
 import com.cheng.user.presenter.view.RegisterView
+import com.cheng.user.service.impl.UserServiceImpl
 
 /**
  * User: wangzecheng (514118702@qq.com)
@@ -12,8 +15,14 @@ import com.cheng.user.presenter.view.RegisterView
 
 class RegisterPresenter : BasePresenter<RegisterView>() {
 
-    fun register(){
-        //假设注册成功
-        mView.onSucceed(200)
+    fun register(mobile: String, verifyCode: String, pwd: String) {
+        val service = UserServiceImpl()
+
+        service.register(mobile, verifyCode, pwd)
+                .execute(object :BaseSubscriber<Boolean>(){
+                    override fun onNext(t: Boolean) {
+                        mView.onSucceed(2001)
+                    }
+                })
     }
 }

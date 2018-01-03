@@ -22,7 +22,7 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
         mPresenter.mView = this
 
         registerBtn.setOnClickListener {
-            mPresenter.register()
+            mPresenter.register("","","")
         }
     }
 }
