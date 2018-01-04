@@ -11,5 +11,5 @@ import com.cheng.baselibrary.presenter.view.BaseView
 
 interface RegisterView :BaseView {
 
-    fun onSucceed(code:Int)
+    fun onRegisterResult(code:Int)
 }

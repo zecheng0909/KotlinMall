@@ -10,6 +10,6 @@ package com.cheng.baselibrary.common
 class BaseConstant {
 
     companion object {
-        val SERVER_ADDRESS = ""
+        val SERVER_ADDRESS = "http://192.168.0.106:8080/CMall/"
     }
 }

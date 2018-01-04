@@ -18,7 +18,7 @@ import org.jetbrains.anko.toast
 
 class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
 
-    override fun onSucceed(code: Int) {
+    override fun onRegisterResult(code: Int) {
         toast("$code")
     }
 
@@ -30,7 +30,7 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
         mPresenter.mView = this
 
         registerBtn.setOnClickListener {
-            mPresenter.register("","","")
+            mPresenter.register(mobileEt.text.toString(), verifyCodeEt.text.toString(), pwdEt.text.toString())
         }
     }
 }
