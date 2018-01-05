@@ -33,6 +33,10 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
         registerBtn.setOnClickListener {
             mPresenter.register(mobileEt.text.toString(), verifyCodeEt.text.toString(), pwdEt.text.toString())
         }
+
+        getVerifyCodeBtn.setOnClickListener {
+            mPresenter.register2(mobileEt.text.toString(), verifyCodeEt.text.toString(), pwdEt.text.toString())
+        }
     }
 
     private fun initInjection() {
