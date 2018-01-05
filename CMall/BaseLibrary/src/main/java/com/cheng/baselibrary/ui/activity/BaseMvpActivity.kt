@@ -2,6 +2,7 @@ package com.cheng.baselibrary.ui.activity
 
 import com.cheng.baselibrary.presenter.BasePresenter
 import com.cheng.baselibrary.presenter.view.BaseView
+import javax.inject.Inject
 
 /**
  * User: wangzecheng (514118702@qq.com)
@@ -20,6 +21,7 @@ open class BaseMvpActivity<T : BasePresenter<*>> : BaseActivity(), BaseView {
     override fun onError() {
     }
 
+    @Inject
     lateinit var mPresenter: T
 
 }

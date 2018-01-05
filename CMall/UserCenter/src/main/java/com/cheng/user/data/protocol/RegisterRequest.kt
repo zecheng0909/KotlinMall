@@ -7,4 +7,4 @@ package com.cheng.user.data.protocol
  * Describe:
  */
 
-data class RegisterRequest(val mobile: String, val pwd: String, val verifyCode: String)
+data class RegisterRequest(val mobile: String, val pwd: String, val verifyCode: String = "123456")

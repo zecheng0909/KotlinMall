@@ -4,22 +4,26 @@ import com.cheng.baselibrary.ext.execute
 import com.cheng.baselibrary.presenter.BasePresenter
 import com.cheng.baselibrary.rx.BaseSubscriber
 import com.cheng.user.presenter.view.RegisterView
-import com.cheng.user.service.impl.UserServiceImpl
+import com.cheng.user.service.UserService
+import javax.inject.Inject
 
 /**
  * User: wangzecheng (514118702@qq.com)
  * Date: 2018-01-02
  * Time: 23:55
- * Describe:
+ * Describe: 处理逻辑调用
  */
 
-class RegisterPresenter : BasePresenter<RegisterView>() {
+class RegisterPresenter @Inject constructor() : BasePresenter<RegisterView>() {
+
+    @Inject
+    lateinit var service: UserService
 
     fun register(mobile: String, verifyCode: String, pwd: String) {
-        val service = UserServiceImpl()
+
 
         service.register(mobile, verifyCode, pwd)
-                .execute(object :BaseSubscriber<Boolean>(){
+                .execute(object : BaseSubscriber<Boolean>() {
                     override fun onNext(t: Boolean) {
                         mView.onRegisterResult(2001)
                     }

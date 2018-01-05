@@ -3,6 +3,8 @@ package com.cheng.user.ui.activity
 import android.os.Bundle
 import com.cheng.baselibrary.ui.activity.BaseMvpActivity
 import com.cheng.user.R
+import com.cheng.user.injection.component.DaggerUserComponent
+import com.cheng.user.injection.module.UserModule
 import com.cheng.user.presenter.RegisterPresenter
 import com.cheng.user.presenter.view.RegisterView
 import kotlinx.android.synthetic.main.activity_register.*
@@ -26,11 +28,15 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        mPresenter = RegisterPresenter()
-        mPresenter.mView = this
+        initInjection()
 
         registerBtn.setOnClickListener {
             mPresenter.register(mobileEt.text.toString(), verifyCodeEt.text.toString(), pwdEt.text.toString())
         }
+    }
+
+    private fun initInjection() {
+        DaggerUserComponent.builder().userModule(UserModule()).build().inject(this)
+        mPresenter.mView = this
     }
 }
