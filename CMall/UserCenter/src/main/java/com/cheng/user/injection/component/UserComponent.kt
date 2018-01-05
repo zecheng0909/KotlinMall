@@ -1,5 +1,7 @@
 package com.cheng.user.injection.component
 
+import com.cheng.baselibrary.injection.PerComponentScope
+import com.cheng.baselibrary.injection.component.ActivityComponent
 import com.cheng.user.injection.module.UserModule
 import com.cheng.user.ui.activity.RegisterActivity
 import dagger.Component
@@ -11,7 +13,8 @@ import dagger.Component
  * Describe:
  */
 
-@Component(modules = [(UserModule::class)])
+@PerComponentScope
+@Component(dependencies = [(ActivityComponent::class)], modules = [(UserModule::class)])
 interface UserComponent {
     fun inject(activity: RegisterActivity)
 }
