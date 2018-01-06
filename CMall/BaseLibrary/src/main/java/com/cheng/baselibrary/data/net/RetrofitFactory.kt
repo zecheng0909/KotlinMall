@@ -10,10 +10,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 /**
- * User: wangzecheng (514118702@qq.com)
+ * User: Cheng
  * Date: 2018-01-03
  * Time: 20:27
- * Describe:Retrofit构建工厂
+ * Describe: Retrofit构建工厂
  */
 
 class RetrofitFactory private constructor() {

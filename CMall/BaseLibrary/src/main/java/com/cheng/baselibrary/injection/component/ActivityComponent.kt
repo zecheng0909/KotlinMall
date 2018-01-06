@@ -6,7 +6,7 @@ import com.cheng.baselibrary.injection.module.ActivityModule
 import dagger.Component
 
 /**
- * User: wangzecheng (514118702@qq.com)
+ * User: Cheng
  * Date: 2018-01-05
  * Time: 19:43
  * Describe: Activity级别的Component

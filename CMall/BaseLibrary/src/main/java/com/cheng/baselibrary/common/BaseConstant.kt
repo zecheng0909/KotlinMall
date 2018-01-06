@@ -1,7 +1,7 @@
 package com.cheng.baselibrary.common
 
 /**
- * User: wangzecheng (514118702@qq.com)
+ * User: Cheng
  * Date: 2018-01-03
  * Time: 20:34
  * Describe:

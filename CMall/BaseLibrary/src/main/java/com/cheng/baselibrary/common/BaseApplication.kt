@@ -6,10 +6,10 @@ import com.cheng.baselibrary.injection.component.DaggerAppComponent
 import com.cheng.baselibrary.injection.module.AppModule
 
 /**
- * User: wangzecheng (514118702@qq.com)
+ * User: Cheng
  * Date: 2018-01-05
  * Time: 19:38
- * Describe:
+ * Describe: 自定义Application
  */
 
 class BaseApplication : Application() {

@@ -7,10 +7,10 @@ import com.cheng.user.ui.activity.RegisterActivity
 import dagger.Component
 
 /**
- * User: wangzecheng (514118702@qq.com)
+ * User: Cheng
  * Date: 2018-01-05
  * Time: 17:38
- * Describe:
+ * Describe: 业务层的Component,依赖于ActivityComponent
  */
 
 @PerComponentScope

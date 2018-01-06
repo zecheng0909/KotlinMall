@@ -9,10 +9,10 @@ import rx.functions.Func1
 import javax.inject.Inject
 
 /**
- * User: wangzecheng (514118702@qq.com)
+ * User: Cheng
  * Date: 2018-01-03
  * Time: 15:25
- * Describe: 处理数据
+ * Describe: User模块的Service接口的具体实现,用来处理数据
  */
 
 class UserServiceImpl @Inject constructor() : UserService {

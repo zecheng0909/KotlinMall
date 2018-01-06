@@ -10,10 +10,10 @@ import com.cheng.baselibrary.presenter.view.BaseView
 import javax.inject.Inject
 
 /**
- * User: wangzecheng (514118702@qq.com)
+ * User: Cheng
  * Date: 2018-01-02
  * Time: 23:41
- * Describe:
+ * Describe: 实现了BaseView接口的Activity基类,声明了持有Presenter对象
  */
 
 open class BaseMvpActivity<T : BasePresenter<*>> : BaseActivity(), BaseView {
@@ -38,6 +38,9 @@ open class BaseMvpActivity<T : BasePresenter<*>> : BaseActivity(), BaseView {
     override fun onError() {
     }
 
+    /**
+     * 初始化Activity级的注解器
+     */
     private fun initActivityInjection() {
         activityComponent = DaggerActivityComponent.builder()
                 .appComponent((application as BaseApplication).appComponent)

@@ -1,13 +1,13 @@
 package com.cheng.baselibrary.ui.activity
 
-import android.support.v7.app.AppCompatActivity
+import com.trello.rxlifecycle.components.support.RxAppCompatActivity
 
 /**
- * User: wangzecheng (514118702@qq.com)
+ * User: Cheng
  * Date: 2018-01-02
  * Time: 23:41
- * Describe:
+ * Describe: 抽取的Activity基类
  */
 
-open class BaseActivity : AppCompatActivity() {
+open class BaseActivity : RxAppCompatActivity() {
 }

@@ -8,7 +8,7 @@ import rx.Observable
 import javax.inject.Inject
 
 /**
- * User: wangzecheng (514118702@qq.com)
+ * User: Cheng
  * Date: 2018-01-04
  * Time: 17:30
  * Describe: 处理网络请求

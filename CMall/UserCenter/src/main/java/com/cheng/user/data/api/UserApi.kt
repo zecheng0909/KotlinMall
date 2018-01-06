@@ -7,10 +7,10 @@ import retrofit2.http.POST
 import rx.Observable
 
 /**
- * User: wangzecheng (514118702@qq.com)
+ * User: Cheng
  * Date: 2018-01-04
  * Time: 16:00
- * Describe:
+ * Describe: Retrofit需要的Api
  */
 
 interface UserApi {

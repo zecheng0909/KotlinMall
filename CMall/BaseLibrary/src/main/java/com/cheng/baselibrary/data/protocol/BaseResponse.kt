@@ -1,7 +1,7 @@
 package com.cheng.baselibrary.data.protocol
 
 /**
- * User: wangzecheng (514118702@qq.com)
+ * User: Cheng
  * Date: 2018-01-04
  * Time: 15:56
  * Describe: 响应数据的基类

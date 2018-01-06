@@ -6,7 +6,7 @@ import dagger.Component
 import javax.inject.Singleton
 
 /**
- * User: wangzecheng (514118702@qq.com)
+ * User: Cheng
  * Date: 2018-01-05
  * Time: 19:36
  * Describe:全局的Component
@@ -16,6 +16,7 @@ import javax.inject.Singleton
 @Component(modules = [(AppModule::class)])
 interface AppComponent {
 
+    @Singleton
     fun context(): Context
 
 }

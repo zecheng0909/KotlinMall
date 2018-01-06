@@ -3,10 +3,10 @@ package com.cheng.baselibrary.presenter
 import com.cheng.baselibrary.presenter.view.BaseView
 
 /**
- * User: wangzecheng (514118702@qq.com)
+ * User: Cheng
  * Date: 2018-01-02
  * Time: 23:39
- * Describe:
+ * Describe: Presenter的基类,声明了持有view对象
  */
 
 open class BasePresenter<T : BaseView> {

@@ -3,10 +3,10 @@ package com.cheng.user.service
 import rx.Observable
 
 /**
- * User: wangzecheng (514118702@qq.com)
+ * User: Cheng
  * Date: 2018-01-03
  * Time: 15:24
- * Describe:
+ * Describe: User模块的Service接口
  */
 
 interface UserService {

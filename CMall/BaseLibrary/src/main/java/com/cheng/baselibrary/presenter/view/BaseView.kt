@@ -1,7 +1,7 @@
 package com.cheng.baselibrary.presenter.view
 
 /**
- * User: wangzecheng (514118702@qq.com)
+ * User: Cheng
  * Date: 2018-01-02
  * Time: 23:40
  * Describe:
