@@ -1,7 +1,9 @@
 package com.cheng.user.service.impl
 
+import com.cheng.baselibrary.data.net.RetrofitFactory
 import com.cheng.baselibrary.ext.convertBoolean
-import com.cheng.baselibrary.rx.BaseFuncBoolean
+import com.cheng.user.data.api.UserApi
+import com.cheng.user.data.protocol.RegisterRequest
 import com.cheng.user.data.repository.UserRepository
 import com.cheng.user.service.UserService
 import rx.Observable
@@ -22,6 +24,14 @@ class UserServiceImpl @Inject constructor() : UserService {
     override fun register(mobile: String, verifyCode: String, pwd: String): Observable<Boolean> {
 
         return repository.register(mobile, pwd, verifyCode)
+                .convertBoolean()
+
+    }
+
+    fun register2(mobile: String, verifyCode: String, pwd: String): Observable<Boolean> {
+
+        return RetrofitFactory.retrofitFactory.create(UserApi::class.java)
+                .register(RegisterRequest(mobile, pwd, verifyCode))
                 .convertBoolean()
 
     }

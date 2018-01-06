@@ -1,5 +1,7 @@
 package com.cheng.baselibrary.ui.activity
 
+import android.os.Bundle
+import com.cheng.baselibrary.common.AppManager
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity
 
 /**
@@ -11,6 +13,14 @@ import com.trello.rxlifecycle.components.support.RxAppCompatActivity
 
 open class BaseActivity : RxAppCompatActivity() {
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        AppManager.appManager.addActivity(this)
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        AppManager.appManager.finishActivity(this)
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.cheng.user.ui.activity
 
 import android.os.Bundle
+import com.cheng.baselibrary.common.AppManager
 import com.cheng.baselibrary.ext.onClick
 import com.cheng.baselibrary.ui.activity.BaseMvpActivity
 import com.cheng.user.R
@@ -21,6 +22,7 @@ import org.jetbrains.anko.toast
 
 class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
 
+    var time: Long = 0
 
     override fun onRegisterResult(message: String) {
         toast(message)
@@ -44,5 +46,22 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
                 .inject(this)
 
         mPresenter.mView = this
+    }
+
+    override fun onBackPressed() {
+        doubleBackExit()
+    }
+
+    /**
+     * 双击back退出app
+     */
+    private fun doubleBackExit() {
+        val currentTime = System.currentTimeMillis()
+        if (currentTime - time > 2000) {
+            toast("再次点击返回键退出应用")
+            time = currentTime
+        } else {
+            AppManager.appManager.exitApp(this)
+        }
     }
 }
