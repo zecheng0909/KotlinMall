@@ -1,6 +1,8 @@
 package com.cheng.baselibrary.presenter
 
 import com.cheng.baselibrary.presenter.view.BaseView
+import com.trello.rxlifecycle.LifecycleProvider
+import javax.inject.Inject
 
 /**
  * User: Cheng
@@ -12,4 +14,7 @@ import com.cheng.baselibrary.presenter.view.BaseView
 open class BasePresenter<T : BaseView> {
 
     lateinit var mView: T
+
+    @Inject
+    lateinit var lifecycleProvider: LifecycleProvider<*>
 }

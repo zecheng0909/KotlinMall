@@ -1,6 +1,8 @@
 package com.cheng.baselibrary.ext
 
 import com.cheng.baselibrary.rx.BaseSubscriber
+import com.trello.rxlifecycle.LifecycleProvider
+import com.trello.rxlifecycle.kotlin.bindToLifecycle
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
@@ -17,8 +19,9 @@ import rx.schedulers.Schedulers
  * 完成了 指定订阅线程在 io
  * 接收订阅在 main
  * */
-fun <T> Observable<T>.execute(subscriber: BaseSubscriber<T>) {
+fun <T> Observable<T>.execute(subscriber: BaseSubscriber<T>, lifecycleProvider: LifecycleProvider<*>) {
     this.observeOn(AndroidSchedulers.mainThread())
+            .compose(lifecycleProvider.bindToLifecycle())
             .subscribeOn(Schedulers.io())
             .subscribe(subscriber)
 }

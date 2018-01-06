@@ -3,6 +3,8 @@ package com.cheng.baselibrary.injection.component
 import android.app.Activity
 import com.cheng.baselibrary.injection.ActivityScope
 import com.cheng.baselibrary.injection.module.ActivityModule
+import com.cheng.baselibrary.injection.module.LifecycleProviderModule
+import com.trello.rxlifecycle.LifecycleProvider
 import dagger.Component
 
 /**
@@ -13,8 +15,11 @@ import dagger.Component
  */
 
 @ActivityScope
-@Component(dependencies = [(AppComponent::class)], modules = [(ActivityModule::class)])
+@Component(dependencies = [(AppComponent::class)],
+        modules = [(ActivityModule::class), (LifecycleProviderModule::class)])
 interface ActivityComponent {
 
     fun activity(): Activity
+
+    fun lifecycleProvider(): LifecycleProvider<*>
 }
