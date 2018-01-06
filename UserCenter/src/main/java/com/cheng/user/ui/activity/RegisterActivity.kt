@@ -1,7 +1,7 @@
 package com.cheng.user.ui.activity
 
 import android.os.Bundle
-import com.cheng.baselibrary.ext.onclick
+import com.cheng.baselibrary.ext.onClick
 import com.cheng.baselibrary.ui.activity.BaseMvpActivity
 import com.cheng.user.R
 import com.cheng.user.injection.component.DaggerUserComponent
@@ -30,7 +30,7 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        registerBtn.onclick {
+        registerBtn.onClick {
             mPresenter.register(mobileEt.text.toString(), verifyCodeEt.text.toString(), pwdEt.text.toString())
         }
 

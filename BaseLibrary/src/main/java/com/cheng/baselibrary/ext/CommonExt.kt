@@ -35,8 +35,8 @@ fun <T> Observable<T>.execute(subscriber: BaseSubscriber<T>, lifecycleProvider: 
  * 扩展了View设置点击事件的方法
  * 使代码简洁
  */
-fun View.onclick(action: () -> Unit) {
-    this.setOnClickListener { action }
+fun View.onClick(action: () -> Unit) {
+    this.setOnClickListener { action() }
 }
 
 /**
