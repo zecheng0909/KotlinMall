@@ -17,7 +17,7 @@ import javax.inject.Inject
  * Describe: 实现了BaseView接口的Activity基类,声明了持有Presenter对象
  */
 
-open class BaseMvpActivity<T : BasePresenter<*>> : BaseActivity(), BaseView {
+abstract class BaseMvpActivity<T : BasePresenter<*>> : BaseActivity(), BaseView {
 
     @Inject
     lateinit var mPresenter: T
@@ -27,8 +27,12 @@ open class BaseMvpActivity<T : BasePresenter<*>> : BaseActivity(), BaseView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        initActivityInjection()
+        initActivityComponent()
+
+        injectComponent()
     }
+
+    abstract fun injectComponent()
 
     override fun showLoading() {
     }
@@ -42,7 +46,7 @@ open class BaseMvpActivity<T : BasePresenter<*>> : BaseActivity(), BaseView {
     /**
      * 初始化Activity级的注解器
      */
-    private fun initActivityInjection() {
+    fun initActivityComponent() {
         activityComponent = DaggerActivityComponent.builder()
                 .appComponent((application as BaseApplication).appComponent)
                 .activityModule(ActivityModule(this))

@@ -1,5 +1,9 @@
 package com.cheng.baselibrary.ext
 
+import android.view.View
+import com.cheng.baselibrary.data.protocol.BaseResponse
+import com.cheng.baselibrary.rx.BaseFunc
+import com.cheng.baselibrary.rx.BaseFuncBoolean
 import com.cheng.baselibrary.rx.BaseSubscriber
 import com.trello.rxlifecycle.LifecycleProvider
 import com.trello.rxlifecycle.kotlin.bindToLifecycle
@@ -25,4 +29,26 @@ fun <T> Observable<T>.execute(subscriber: BaseSubscriber<T>, lifecycleProvider: 
             .compose(lifecycleProvider.bindToLifecycle())
             .subscribeOn(Schedulers.io())
             .subscribe(subscriber)
+}
+
+/**
+ * 扩展了View设置点击事件的方法
+ * 使代码简洁
+ */
+fun View.onclick(action: () -> Unit) {
+    this.setOnClickListener { action }
+}
+
+/**
+ * 替代了flatMap,传入BaseFunc
+ */
+fun <T> Observable<BaseResponse<T>>.convert(): Observable<T> {
+    return this.flatMap(BaseFunc())
+}
+
+/**
+ * 替代了flatMap,传入BaseFuncBoolean
+ */
+fun <T> Observable<BaseResponse<T>>.convertBoolean(): Observable<Boolean> {
+    return this.flatMap(BaseFuncBoolean())
 }

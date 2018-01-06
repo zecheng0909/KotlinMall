@@ -24,7 +24,7 @@ class RegisterPresenter @Inject constructor() : BasePresenter<RegisterView>() {
         service.register(mobile, verifyCode, pwd)
                 .execute(object : BaseSubscriber<Boolean>() {
                     override fun onNext(t: Boolean) {
-                        mView.onRegisterResult(2001)
+                        mView.onRegisterResult("200")
                     }
                 }, lifecycleProvider)
     }

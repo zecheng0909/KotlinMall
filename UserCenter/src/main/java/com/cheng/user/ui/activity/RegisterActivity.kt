@@ -1,6 +1,7 @@
 package com.cheng.user.ui.activity
 
 import android.os.Bundle
+import com.cheng.baselibrary.ext.onclick
 import com.cheng.baselibrary.ui.activity.BaseMvpActivity
 import com.cheng.user.R
 import com.cheng.user.injection.component.DaggerUserComponent
@@ -20,26 +21,22 @@ import org.jetbrains.anko.toast
 
 class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
 
-    override fun onRegisterResult(code: Int) {
-        toast("$code")
+
+    override fun onRegisterResult(message: String) {
+        toast(message)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        initInjection()
-
-        registerBtn.setOnClickListener {
+        registerBtn.onclick {
             mPresenter.register(mobileEt.text.toString(), verifyCodeEt.text.toString(), pwdEt.text.toString())
         }
 
-        getVerifyCodeBtn.setOnClickListener {
-
-        }
     }
 
-    private fun initInjection() {
+    override fun injectComponent() {
         DaggerUserComponent.builder()
                 .activityComponent(activityComponent)
                 .userModule(UserModule())
