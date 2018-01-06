@@ -1,2 +1,2 @@
 # KotlinMall
-学习一下Kotlin
+用Kotlin构建的电商app
