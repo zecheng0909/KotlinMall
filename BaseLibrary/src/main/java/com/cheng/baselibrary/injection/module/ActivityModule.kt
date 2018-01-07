@@ -1,6 +1,7 @@
 package com.cheng.baselibrary.injection.module
 
 import android.app.Activity
+import com.cheng.baselibrary.injection.ActivityScope
 import dagger.Module
 import dagger.Provides
 
@@ -14,6 +15,7 @@ import dagger.Provides
 @Module
 class ActivityModule(private val activity: Activity) {
 
+    @ActivityScope
     @Provides
     fun providesActivity(): Activity {
         return activity

@@ -1,6 +1,7 @@
 package com.cheng.baselibrary.injection.component
 
 import android.app.Activity
+import android.content.Context
 import com.cheng.baselibrary.injection.ActivityScope
 import com.cheng.baselibrary.injection.module.ActivityModule
 import com.cheng.baselibrary.injection.module.LifecycleProviderModule
@@ -20,6 +21,6 @@ import dagger.Component
 interface ActivityComponent {
 
     fun activity(): Activity
-
+    fun context(): Context
     fun lifecycleProvider(): LifecycleProvider<*>
 }

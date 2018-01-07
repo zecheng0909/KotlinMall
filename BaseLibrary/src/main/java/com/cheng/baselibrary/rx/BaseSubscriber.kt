@@ -1,5 +1,6 @@
 package com.cheng.baselibrary.rx
 
+import com.cheng.baselibrary.presenter.view.BaseView
 import rx.Subscriber
 
 /**
@@ -10,15 +11,18 @@ import rx.Subscriber
  * 使用时重写关心的事件即可
  */
 
-open class BaseSubscriber<T> : Subscriber<T>() {
+open class BaseSubscriber<T>(val baseView: BaseView) : Subscriber<T>() {
 
-    override fun onError(e: Throwable?) {
-
+    override fun onCompleted() {
+        baseView.hideLoading()
     }
 
     override fun onNext(t: T) {
+
     }
 
-    override fun onCompleted() {
+    override fun onError(e: Throwable?) {
+        baseView.hideLoading()
     }
+
 }

@@ -1,6 +1,8 @@
 package com.cheng.baselibrary.presenter
 
+import android.content.Context
 import com.cheng.baselibrary.presenter.view.BaseView
+import com.kotlin.base.utils.NetWorkUtils
 import com.trello.rxlifecycle.LifecycleProvider
 import javax.inject.Inject
 
@@ -17,4 +19,12 @@ open class BasePresenter<T : BaseView> {
 
     @Inject
     lateinit var lifecycleProvider: LifecycleProvider<*>
+
+    @Inject
+    lateinit var context: Context
+
+    fun checkNerWork(): Boolean {
+        return NetWorkUtils.isNetWorkAvailable(context)
+    }
+
 }

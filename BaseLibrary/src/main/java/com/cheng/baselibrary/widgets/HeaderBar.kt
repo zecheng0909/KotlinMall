@@ -36,6 +36,9 @@ class HeaderBar @JvmOverloads constructor(
         initView()
     }
 
+    /**
+     * 根据xml配置的属性,初始化对应的控件
+     */
     private fun initView() {
         View.inflate(context, R.layout.layout_header_bar, this)
 

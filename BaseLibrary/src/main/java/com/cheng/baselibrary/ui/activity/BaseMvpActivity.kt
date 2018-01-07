@@ -8,6 +8,7 @@ import com.cheng.baselibrary.injection.module.ActivityModule
 import com.cheng.baselibrary.injection.module.LifecycleProviderModule
 import com.cheng.baselibrary.presenter.BasePresenter
 import com.cheng.baselibrary.presenter.view.BaseView
+import com.cheng.baselibrary.widgets.ProgressLoading
 import javax.inject.Inject
 
 /**
@@ -24,20 +25,26 @@ abstract class BaseMvpActivity<T : BasePresenter<*>> : BaseActivity(), BaseView 
 
     lateinit var activityComponent: ActivityComponent
 
+    lateinit var loadingDialog: ProgressLoading
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         initActivityComponent()
 
         injectComponent()
+
+        loadingDialog = ProgressLoading.create(this)
     }
 
     abstract fun injectComponent()
 
     override fun showLoading() {
+        loadingDialog.showLoading()
     }
 
     override fun hideLoading() {
+        loadingDialog.hideLoading()
     }
 
     override fun onError() {
@@ -46,7 +53,7 @@ abstract class BaseMvpActivity<T : BasePresenter<*>> : BaseActivity(), BaseView 
     /**
      * 初始化Activity级的注解器
      */
-    fun initActivityComponent() {
+    private fun initActivityComponent() {
         activityComponent = DaggerActivityComponent.builder()
                 .appComponent((application as BaseApplication).appComponent)
                 .activityModule(ActivityModule(this))
