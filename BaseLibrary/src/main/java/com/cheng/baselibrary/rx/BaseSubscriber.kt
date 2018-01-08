@@ -11,7 +11,7 @@ import rx.Subscriber
  * 使用时重写关心的事件即可
  */
 
-open class BaseSubscriber<T>(val baseView: BaseView) : Subscriber<T>() {
+open class BaseSubscriber<T>(private val baseView: BaseView) : Subscriber<T>() {
 
     override fun onCompleted() {
         baseView.hideLoading()
@@ -23,6 +23,9 @@ open class BaseSubscriber<T>(val baseView: BaseView) : Subscriber<T>() {
 
     override fun onError(e: Throwable?) {
         baseView.hideLoading()
+        if (e is BaseException) {
+            baseView.onError(e.msg)
+        }
     }
 
 }

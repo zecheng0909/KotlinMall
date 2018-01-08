@@ -1,7 +1,9 @@
 package com.cheng.user.ui.activity
 
 import android.os.Bundle
+import android.view.View
 import com.cheng.baselibrary.common.AppManager
+import com.cheng.baselibrary.ext.enable
 import com.cheng.baselibrary.ext.onClick
 import com.cheng.baselibrary.ui.activity.BaseMvpActivity
 import com.cheng.user.R
@@ -21,27 +23,50 @@ import org.jetbrains.anko.toast
  */
 
 
-class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
+class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView,
+        View.OnClickListener {
 
     var time: Long = 0
-
-    override fun onRegisterResult(message: String) {
-        toast(message)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        registerBtn.onClick {
-            mPresenter.register(mobileEt.text.toString(), verifyCodeEt.text.toString(), pwdEt.text.toString())
-        }
-
-        getVerifyCodeBtn.onClick {
-            getVerifyCodeBtn.requestSendVerifyNumber()
-        }
-
+        initView()
     }
+
+    /**
+     * 初始化视图
+     */
+    private fun initView() {
+
+        registerBtn.enable(mobileEt, ::isBtnEnabled)
+        registerBtn.enable(verifyCodeEt, ::isBtnEnabled)
+        registerBtn.enable(pwdEt, ::isBtnEnabled)
+        registerBtn.enable(pwdConfirmEt, ::isBtnEnabled)
+
+        verifyCodeBtn.setOnClickListener(this)
+        registerBtn.setOnClickListener(this)
+    }
+
+    override fun onClick(view: View) {
+        when (view) {
+            verifyCodeBtn -> {
+                verifyCodeBtn.requestSendVerifyNumber()
+                toast("发送验证码成功")
+            }
+
+            registerBtn -> {
+                if(pwdEt.text.toString() != pwdConfirmEt.text.toString()){
+                    toast("两次输入密码不正确")
+                    return
+                }
+                mPresenter.register(mobileEt.text.toString(),
+                        verifyCodeEt.text.toString(), pwdEt.text.toString())
+            }
+        }
+    }
+
 
     override fun injectComponent() {
         DaggerUserComponent.builder()
@@ -51,6 +76,10 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
                 .inject(this)
 
         mPresenter.mView = this
+    }
+
+    override fun onRegisterResult(message: String) {
+        toast(message)
     }
 
     override fun onBackPressed() {
@@ -68,5 +97,12 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
         } else {
             AppManager.appManager.exitApp(this)
         }
+    }
+
+    private fun isBtnEnabled(): Boolean {
+        return mobileEt.text.isNullOrEmpty().not() and
+                verifyCodeEt.text.isNullOrEmpty().not() and
+                pwdEt.text.isNullOrEmpty().not() and
+                pwdConfirmEt.text.isNullOrEmpty().not()
     }
 }

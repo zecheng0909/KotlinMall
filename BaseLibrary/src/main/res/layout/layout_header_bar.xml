@@ -28,5 +28,4 @@
         android:paddingRight="@dimen/common_padding"
         android:textColor="@color/common_white"
         android:visibility="gone" />
-
 </RelativeLayout>

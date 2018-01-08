@@ -1,10 +1,13 @@
 package com.cheng.baselibrary.ext
 
 import android.view.View
+import android.widget.Button
+import android.widget.EditText
 import com.cheng.baselibrary.data.protocol.BaseResponse
 import com.cheng.baselibrary.rx.BaseFunc
 import com.cheng.baselibrary.rx.BaseFuncBoolean
 import com.cheng.baselibrary.rx.BaseSubscriber
+import com.kotlin.base.widgets.DefaultTextWatcher
 import com.trello.rxlifecycle.LifecycleProvider
 import com.trello.rxlifecycle.kotlin.bindToLifecycle
 import rx.Observable
@@ -51,4 +54,19 @@ fun <T> Observable<BaseResponse<T>>.convert(): Observable<T> {
  */
 fun <T> Observable<BaseResponse<T>>.convertBoolean(): Observable<Boolean> {
     return this.flatMap(BaseFuncBoolean())
+}
+
+/**
+ * button监听EditText的状态,来改变自身是否可以点击,判断逻辑根据传递进来的Lambda
+ */
+fun Button.enable(et: EditText, action: () -> Boolean) {
+
+    val btn = this
+
+    et.addTextChangedListener(object : DefaultTextWatcher() {
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            super.onTextChanged(s, start, before, count)
+            btn.isEnabled = action()
+        }
+    })
 }
