@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    style="@style/MatchMatch"
     android:orientation="vertical">
 
     <com.cheng.baselibrary.widgets.HeaderBar
@@ -11,8 +10,7 @@
         app:titleText="注册" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/MatchWrap"
         android:orientation="horizontal">
 
         <EditText
@@ -22,11 +20,9 @@
             android:layout_weight="1"
             android:hint="请输入手机号码" />
 
-        <Button
+        <com.kotlin.base.widgets.VerifyButton
             android:id="@+id/getVerifyCodeBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="获取验证码" />
+            style="@style/WrapWrap" />
 
     </LinearLayout>
 

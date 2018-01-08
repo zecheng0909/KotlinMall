@@ -16,5 +16,7 @@ import dagger.Component
 @PerComponentScope
 @Component(dependencies = [(ActivityComponent::class)], modules = [(UserModule::class)])
 interface UserComponent {
+
     fun inject(activity: RegisterActivity)
+
 }

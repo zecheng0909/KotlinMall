@@ -1,4 +1,4 @@
-package com.cheng.baselibrary.ui.activity
+package com.cheng.baselibrary.ui.fragment
 
 import android.os.Bundle
 import com.cheng.baselibrary.common.BaseApplication
@@ -14,12 +14,12 @@ import javax.inject.Inject
 
 /**
  * User: Cheng
- * Date: 2018-01-02
- * Time: 23:41
- * Describe: 实现了BaseView接口的Activity基类,声明了持有Presenter对象
+ * Date: 2018-01-08
+ * Time: 14:14
+ * Describe:
  */
 
-abstract class BaseMvpActivity<T : BasePresenter<*>> : BaseActivity(), BaseView {
+abstract class BaseMvpFragment<T : BasePresenter<*>> : BaseFragment(), BaseView {
 
     @Inject
     lateinit var mPresenter: T
@@ -31,11 +31,9 @@ abstract class BaseMvpActivity<T : BasePresenter<*>> : BaseActivity(), BaseView 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        initActivityComponent()
+        loadingDialog = ProgressLoading.create(activity)
 
         injectComponent()
-
-        loadingDialog = ProgressLoading.create(this)
     }
 
     override fun showLoading() {
@@ -47,7 +45,7 @@ abstract class BaseMvpActivity<T : BasePresenter<*>> : BaseActivity(), BaseView 
     }
 
     override fun onError(errorText: String) {
-        toast(errorText)
+        activity.toast(errorText)
     }
 
     /**
@@ -60,10 +58,9 @@ abstract class BaseMvpActivity<T : BasePresenter<*>> : BaseActivity(), BaseView 
      */
     private fun initActivityComponent() {
         activityComponent = DaggerActivityComponent.builder()
-                .appComponent((application as BaseApplication).appComponent)
-                .activityModule(ActivityModule(this))
+                .appComponent((activity.application as BaseApplication).appComponent)
+                .activityModule(ActivityModule(activity))
                 .lifecycleProviderModule(LifecycleProviderModule(this))
                 .build()
     }
-
 }

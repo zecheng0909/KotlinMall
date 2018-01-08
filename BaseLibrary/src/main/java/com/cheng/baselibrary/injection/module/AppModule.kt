@@ -14,7 +14,7 @@ import javax.inject.Singleton
  */
 
 @Module
-@Singleton
+// @Singleton
 class AppModule(private val context: BaseApplication) {
 
     @Provides
