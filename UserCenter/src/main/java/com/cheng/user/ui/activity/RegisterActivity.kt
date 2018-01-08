@@ -26,8 +26,6 @@ import org.jetbrains.anko.toast
 class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView,
         View.OnClickListener {
 
-    var time: Long = 0
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -49,25 +47,9 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView,
         registerBtn.setOnClickListener(this)
     }
 
-    override fun onClick(view: View) {
-        when (view) {
-            verifyCodeBtn -> {
-                verifyCodeBtn.requestSendVerifyNumber()
-                toast("发送验证码成功")
-            }
-
-            registerBtn -> {
-                if(pwdEt.text.toString() != pwdConfirmEt.text.toString()){
-                    toast("两次输入密码不正确")
-                    return
-                }
-                mPresenter.register(mobileEt.text.toString(),
-                        verifyCodeEt.text.toString(), pwdEt.text.toString())
-            }
-        }
-    }
-
-
+    /**
+     * 初始化依赖对象
+     */
     override fun injectComponent() {
         DaggerUserComponent.builder()
                 .activityComponent(activityComponent)
@@ -78,27 +60,34 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView,
         mPresenter.mView = this
     }
 
+    override fun onClick(view: View) {
+        when (view) {
+            verifyCodeBtn -> {
+                verifyCodeBtn.requestSendVerifyNumber()
+                toast("发送验证码成功")
+            }
+
+            registerBtn -> {
+                if (pwdEt.text.toString() != pwdConfirmEt.text.toString()) {
+                    toast("两次输入密码不正确")
+                    return
+                }
+                mPresenter.register(mobileEt.text.toString(),
+                        pwdEt.text.toString(), verifyCodeEt.text.toString())
+            }
+        }
+    }
+
+    /**
+     * 注册成功的回调
+     */
     override fun onRegisterResult(message: String) {
         toast(message)
     }
 
-    override fun onBackPressed() {
-        doubleBackExit()
-    }
-
     /**
-     * 双击back退出app
+     * 检查输入框是否有文本
      */
-    private fun doubleBackExit() {
-        val currentTime = System.currentTimeMillis()
-        if (currentTime - time > 2000) {
-            toast("再次点击返回键退出应用")
-            time = currentTime
-        } else {
-            AppManager.appManager.exitApp(this)
-        }
-    }
-
     private fun isBtnEnabled(): Boolean {
         return mobileEt.text.isNullOrEmpty().not() and
                 verifyCodeEt.text.isNullOrEmpty().not() and

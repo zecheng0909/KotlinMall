@@ -10,6 +10,10 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+apply plugin: 'kotlin-allopen'
+
+apply plugin: 'kotlin-noarg'
+
 android {
     compileSdkVersion 26
 
@@ -43,6 +47,14 @@ android {
     }
 
 
+}
+
+noArg{
+    annotation("com.cheng.baselibrary.ext.PoKo")
+}
+
+allOpen{
+    annotation("com.cheng.baselibrary.ext.PoKo")
 }
 
 dependencies {

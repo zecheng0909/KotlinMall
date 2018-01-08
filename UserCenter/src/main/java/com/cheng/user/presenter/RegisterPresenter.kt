@@ -19,13 +19,13 @@ class RegisterPresenter @Inject constructor() : BasePresenter<RegisterView>() {
     @Inject
     lateinit var service: UserService
 
-    fun register(mobile: String, verifyCode: String, pwd: String) {
+    fun register(mobile: String, pwd: String, verifyCode: String) {
 
         if (!checkNerWork()) {
             return
         }
         mView.showLoading()
-        service.register(mobile, verifyCode, pwd)
+        service.register(mobile, pwd, verifyCode)
                 .execute(object : BaseSubscriber<Boolean>(mView) {
                     override fun onNext(t: Boolean) {
                         mView.onRegisterResult("200")

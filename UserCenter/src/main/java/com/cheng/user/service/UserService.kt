@@ -1,5 +1,6 @@
 package com.cheng.user.service
 
+import com.cheng.user.data.protocol.UserInfo
 import rx.Observable
 
 /**
@@ -11,6 +12,20 @@ import rx.Observable
 
 interface UserService {
 
+    /**
+     * 注册
+     * @mobile 手机号
+     * @verifyCode 验证码
+     * @pwd 密码
+     */
     fun register(mobile: String, verifyCode: String, pwd: String): Observable<Boolean>
+
+    /**
+     * 登录
+     * @mobile 手机号
+     * @pwd 密码
+     * @pushId 推送ID
+     */
+    fun login(mobile: String, pwd: String, pushId: String): Observable<UserInfo>
 
 }

@@ -1,10 +1,13 @@
 package com.cheng.baselibrary.widgets
 
+import android.app.Activity
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.TextView
 import com.cheng.baselibrary.R
+import com.cheng.baselibrary.ext.onClick
 import kotlinx.android.synthetic.main.layout_header_bar.view.*
 
 /**
@@ -34,6 +37,12 @@ class HeaderBar @JvmOverloads constructor(
         attributes.recycle()
 
         initView()
+
+        backIv.onClick {
+            if (context is Activity){
+                context.finish()
+            }
+        }
     }
 
     /**
@@ -51,5 +60,9 @@ class HeaderBar @JvmOverloads constructor(
             rightTv.visibility = View.VISIBLE
         }
 
+    }
+
+    fun getRightText(): TextView {
+        return rightTv
     }
 }

@@ -6,6 +6,10 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+apply plugin: 'kotlin-allopen'
+
+apply plugin: 'kotlin-noarg'
+
 android {
     compileSdkVersion 26
 
