@@ -82,6 +82,7 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView,
      */
     override fun onLoginResult(message: String) {
         toast(message)
+        startActivity<UserInfoActivity>()
     }
 
     override fun onBackPressed() {

@@ -3,10 +3,7 @@ package com.cheng.user.injection.component
 import com.cheng.baselibrary.injection.PerComponentScope
 import com.cheng.baselibrary.injection.component.ActivityComponent
 import com.cheng.user.injection.module.UserModule
-import com.cheng.user.ui.activity.ForgetPwdActivity
-import com.cheng.user.ui.activity.LoginActivity
-import com.cheng.user.ui.activity.RegisterActivity
-import com.cheng.user.ui.activity.ResetPwdActivity
+import com.cheng.user.ui.activity.*
 import dagger.Component
 
 /**
@@ -20,12 +17,14 @@ import dagger.Component
 @Component(dependencies = [(ActivityComponent::class)], modules = [(UserModule::class)])
 interface UserComponent {
 
-    fun inject(activity: RegisterActivity)
+    fun inject(registerActivity: RegisterActivity)
 
-    fun inject(activity: LoginActivity)
+    fun inject(loginActivity: LoginActivity)
 
-    fun inject(activity: ForgetPwdActivity)
+    fun inject(forgetPwdActivity: ForgetPwdActivity)
 
     fun inject(resetPwdActivity: ResetPwdActivity)
+
+    fun inject(userInfoActivity: UserInfoActivity)
 
 }

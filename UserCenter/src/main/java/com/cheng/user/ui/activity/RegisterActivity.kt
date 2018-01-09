@@ -2,16 +2,13 @@ package com.cheng.user.ui.activity
 
 import android.os.Bundle
 import android.view.View
-import com.cheng.baselibrary.common.AppManager
 import com.cheng.baselibrary.ext.enable
-import com.cheng.baselibrary.ext.onClick
 import com.cheng.baselibrary.ui.activity.BaseMvpActivity
 import com.cheng.user.R
 import com.cheng.user.injection.component.DaggerUserComponent
 import com.cheng.user.injection.module.UserModule
 import com.cheng.user.presenter.RegisterPresenter
 import com.cheng.user.presenter.view.RegisterView
-import com.kotlin.base.widgets.VerifyButton
 import kotlinx.android.synthetic.main.activity_register.*
 import org.jetbrains.anko.toast
 

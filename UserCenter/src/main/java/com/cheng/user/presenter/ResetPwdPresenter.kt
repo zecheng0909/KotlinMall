@@ -3,7 +3,6 @@ package com.cheng.user.presenter
 import com.cheng.baselibrary.ext.execute
 import com.cheng.baselibrary.presenter.BasePresenter
 import com.cheng.baselibrary.rx.BaseSubscriber
-import com.cheng.user.presenter.view.ForgetPwdView
 import com.cheng.user.presenter.view.ResetPwdView
 import com.cheng.user.service.UserService
 import javax.inject.Inject
