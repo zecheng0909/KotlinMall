@@ -42,4 +42,13 @@ interface UserService {
      */
     fun resetPwd(mobile: String, pwd: String): Observable<Boolean>
 
+    /**
+     * 修改用户信息
+     * @userIcon 头像
+     * @userName 名称
+     * @gender 性别
+     * @sign 签名
+     */
+    fun editUser(userIcon: String, userName: String, gender: String, sign: String): Observable<UserInfo>
+
 }

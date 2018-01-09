@@ -10,12 +10,13 @@ package com.cheng.baselibrary.common
 class BaseConstant {
 
     companion object {
+
         /**
          * BaseUrl
          */
-        const val SERVER_ADDRESS = "http://192.168.199.212:8080/CMall/"
+//        const val SERVER_ADDRESS = "http://192.168.199.212:8080/CMall/"
 //        const val SERVER_ADDRESS = "http://10.0.2.10:8080/CMall/"
-//        const val SERVER_ADDRESS = "http://192.168.0.110:8080/CMall/"
+        const val SERVER_ADDRESS = "http://192.168.0.111:8080/CMall/"
 
         /**
          * 七牛服务地址
@@ -26,5 +27,10 @@ class BaseConstant {
          * SP表名
          */
         const val TABLE_PREFS = "Kotlin_Mall"
+
+        /**
+         * 用户Token
+         */
+        const val KEY_SP_TOKEN = "TOKEN"
     }
 }

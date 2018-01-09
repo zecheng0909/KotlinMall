@@ -1,6 +1,7 @@
 package com.cheng.baselibrary.data.net
 
 import com.cheng.baselibrary.common.BaseConstant
+import com.kotlin.base.utils.AppPrefsUtils
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -68,6 +69,7 @@ class RetrofitFactory private constructor() {
                     .newBuilder()
                     .addHeader("Content-Type", "application/json")
                     .addHeader("charset", "UTF-8")
+                    .addHeader("token", AppPrefsUtils.getString(BaseConstant.KEY_SP_TOKEN))
                     .build()
 
             chain.proceed(request)

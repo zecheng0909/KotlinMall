@@ -4,6 +4,7 @@ import com.cheng.baselibrary.data.net.RetrofitFactory
 import com.cheng.baselibrary.data.protocol.BaseResponse
 import com.cheng.user.data.api.UserApi
 import com.cheng.user.data.protocol.*
+import com.kotlin.user.data.protocol.EditUserRequest
 import rx.Observable
 import javax.inject.Inject
 
@@ -35,5 +36,10 @@ class UserRepository @Inject constructor() {
     fun resetPwd(mobile: String, pwd: String): Observable<BaseResponse<String>> {
         return RetrofitFactory.retrofitFactory.create(UserApi::class.java)
                 .resetPwd(ResetPwdRequest(mobile = mobile, pwd = pwd))
+    }
+
+    fun editUser(userIcon: String, userName: String, gender: String, sign: String): Observable<BaseResponse<UserInfo>> {
+        return RetrofitFactory.retrofitFactory.create(UserApi::class.java)
+                .editUser(EditUserRequest(userIcon = userIcon, userName = userName, gender = gender, sign = sign))
     }
 }

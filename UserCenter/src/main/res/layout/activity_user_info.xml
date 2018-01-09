@@ -4,7 +4,7 @@
     style="@style/MatchMatch.Vertical.Common">
 
     <com.cheng.baselibrary.widgets.HeaderBar
-        android:id="@id/mHeaderBar"
+        android:id="@id/headerBar"
         style="@style/MatchWrap"
         app:rightText="@string/common_save"
         app:titleText="个人信息" />
@@ -45,7 +45,7 @@
             android:text="昵称" />
 
         <EditText
-            android:id="@+id/mUserNameEt"
+            android:id="@+id/userNameEt"
             style="@style/user_info_content_style"
             android:background="@null"
             android:hint="请称呼我"
@@ -65,7 +65,7 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/mGenderMaleRb"
+                android:id="@+id/genderMaleRb"
                 android:layout_width="28.0dip"
                 android:layout_height="28.0dip"
                 android:layout_marginRight="@dimen/common_margin"
@@ -78,7 +78,7 @@
                 android:textSize="@dimen/text_middle_size" />
 
             <RadioButton
-                android:id="@+id/mGenderFemaleRb"
+                android:id="@+id/genderFemaleRb"
                 android:layout_width="28.0dip"
                 android:layout_height="28.0dip"
                 android:background="@drawable/gender_bg_selector"
@@ -98,8 +98,9 @@
             android:text="手机" />
 
         <TextView
-            android:id="@+id/mUserMobileTv"
+            android:id="@+id/userMobileTv"
             style="@style/user_info_content_style" />
+
     </RelativeLayout>
 
     <RelativeLayout style="@style/user_info_line_style">
@@ -109,7 +110,7 @@
             android:text="签名" />
 
         <EditText
-            android:id="@+id/mUserSignEt"
+            android:id="@+id/userSignEt"
             style="@style/user_info_content_style"
             android:background="@null"
             android:hint="请您填写签名"

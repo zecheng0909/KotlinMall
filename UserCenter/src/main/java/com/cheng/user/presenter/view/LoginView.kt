@@ -1,6 +1,7 @@
 package com.cheng.user.presenter.view
 
 import com.cheng.baselibrary.presenter.view.BaseView
+import com.cheng.user.data.protocol.UserInfo
 
 /**
  * User: Cheng
@@ -11,5 +12,5 @@ import com.cheng.baselibrary.presenter.view.BaseView
 
 interface LoginView :BaseView {
 
-    fun onLoginResult(message:String)
+    fun onLoginResult(userInfo: UserInfo)
 }

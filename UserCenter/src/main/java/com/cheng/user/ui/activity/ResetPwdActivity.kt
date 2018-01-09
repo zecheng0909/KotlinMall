@@ -22,7 +22,6 @@ import org.jetbrains.anko.toast
  * Describe: 重置密码页面
  */
 
-
 class ResetPwdActivity : BaseMvpActivity<ResetPwdPresenter>(), ResetPwdView {
 
     override fun onCreate(savedInstanceState: Bundle?) {

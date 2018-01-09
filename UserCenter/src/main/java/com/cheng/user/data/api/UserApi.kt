@@ -2,6 +2,7 @@ package com.cheng.user.data.api
 
 import com.cheng.baselibrary.data.protocol.BaseResponse
 import com.cheng.user.data.protocol.*
+import com.kotlin.user.data.protocol.EditUserRequest
 import retrofit2.http.Body
 import retrofit2.http.POST
 import rx.Observable
@@ -26,4 +27,7 @@ interface UserApi {
 
     @POST("userCenter/resetPwd")
     fun resetPwd(@Body resetPwdRequest: ResetPwdRequest): Observable<BaseResponse<String>>
+
+    @POST("userCenter/editUser")
+    fun editUser(@Body editUserRequest: EditUserRequest): Observable<BaseResponse<UserInfo>>
 }

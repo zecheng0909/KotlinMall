@@ -1,6 +1,7 @@
 package com.cheng.user.presenter.view
 
 import com.cheng.baselibrary.presenter.view.BaseView
+import com.cheng.user.data.protocol.UserInfo
 
 /**
  * User: Cheng
@@ -12,4 +13,6 @@ import com.cheng.baselibrary.presenter.view.BaseView
 interface UserInfoView : BaseView {
 
     fun onGetUploadTokenResult(result: String)
+
+    fun onEditUserTokenResult(userInfo: UserInfo)
 }

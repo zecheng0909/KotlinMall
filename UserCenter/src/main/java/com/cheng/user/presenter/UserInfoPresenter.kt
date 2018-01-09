@@ -3,6 +3,7 @@ package com.cheng.user.presenter
 import com.cheng.baselibrary.ext.execute
 import com.cheng.baselibrary.presenter.BasePresenter
 import com.cheng.baselibrary.rx.BaseSubscriber
+import com.cheng.user.data.protocol.UserInfo
 import com.cheng.user.presenter.view.UserInfoView
 import com.cheng.user.service.UploadService
 import com.cheng.user.service.UserService
@@ -18,14 +19,29 @@ import javax.inject.Inject
 class UserInfoPresenter @Inject constructor() : BasePresenter<UserInfoView>() {
 
     @Inject
-    lateinit var service: UploadService
+    lateinit var uploadService: UploadService
+
+    @Inject
+    lateinit var userService: UserService
 
     fun getUploadToken() {
-        service.getUploadToken().execute(object : BaseSubscriber<String>(mView) {
-            override fun onNext(t: String) {
-                mView.onGetUploadTokenResult(t)
-            }
-        }, lifecycleProvider)
+        mView.showLoading()
+        uploadService.getUploadToken()
+                .execute(object : BaseSubscriber<String>(mView) {
+                    override fun onNext(t: String) {
+                        mView.onGetUploadTokenResult(t)
+                    }
+                }, lifecycleProvider)
+    }
+
+    fun editUser(userIcon: String, userName: String, gender: String, sign: String) {
+        mView.showLoading()
+        userService.editUser(userIcon = userIcon, userName = userName, gender = gender, sign = sign)
+                .execute(object : BaseSubscriber<UserInfo>(mView) {
+                    override fun onNext(t: UserInfo) {
+                        mView.onEditUserTokenResult(t)
+                    }
+                }, lifecycleProvider)
     }
 
 }

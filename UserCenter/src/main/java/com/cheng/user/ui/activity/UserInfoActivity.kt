@@ -11,6 +11,7 @@ import com.cheng.baselibrary.common.BaseConstant
 import com.cheng.baselibrary.ext.onClick
 import com.cheng.baselibrary.ui.activity.BaseMvpActivity
 import com.cheng.user.R
+import com.cheng.user.data.protocol.UserInfo
 import com.cheng.user.injection.component.DaggerUserComponent
 import com.cheng.user.injection.module.UserModule
 import com.cheng.user.presenter.UserInfoPresenter
@@ -24,8 +25,11 @@ import com.jph.takephoto.model.TResult
 import com.jph.takephoto.permission.InvokeListener
 import com.jph.takephoto.permission.PermissionManager
 import com.jph.takephoto.permission.PermissionManager.TPermissionType
+import com.kotlin.base.utils.AppPrefsUtils
 import com.kotlin.base.utils.DateUtils
 import com.kotlin.base.utils.GlideUtils
+import com.kotlin.provider.common.ProviderConstant
+import com.kotlin.user.utils.UserPrefsUtils
 import com.qiniu.android.http.ResponseInfo
 import com.qiniu.android.storage.UpCompletionHandler
 import com.qiniu.android.storage.UploadManager
@@ -45,14 +49,17 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView,
         TakePhoto.TakeResultListener, InvokeListener {
 
     private lateinit var invokeParam: InvokeParam
-
     private lateinit var takePhoto: TakePhotoImpl
 
     private lateinit var tempFile: File
-
     private var localFilePath: String? = null
-
     private lateinit var remoteFileUrl: String
+
+    private var userIcon: String? = null
+    private var userName: String? = null
+    private var userMobile: String? = null
+    private var userGender: String? = null
+    private var userSign: String? = null
 
     private val uploadManager: UploadManager by lazy { UploadManager() }
 
@@ -64,6 +71,29 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView,
         takePhoto.onCreate(savedInstanceState)
 
         initView()
+        initData()
+    }
+
+    /**
+     * 初始化数据
+     */
+    private fun initData() {
+        userIcon = AppPrefsUtils.getString(ProviderConstant.KEY_SP_USER_ICON)
+        userName = AppPrefsUtils.getString(ProviderConstant.KEY_SP_USER_NAME)
+        userMobile = AppPrefsUtils.getString(ProviderConstant.KEY_SP_USER_MOBILE)
+        userGender = AppPrefsUtils.getString(ProviderConstant.KEY_SP_USER_GENDER)
+        userSign = AppPrefsUtils.getString(ProviderConstant.KEY_SP_USER_SIGN)
+        remoteFileUrl = localFilePath!!
+        if (userIcon != "") GlideUtils.loadUrlImage(this, userIcon!!, userIconIv)
+        userNameEt.setText(userName)
+        userMobileTv.text = userMobile
+        if (userGender == "0") {
+            genderMaleRb.isChecked = true
+        } else {
+            genderFemaleRb.isChecked = true
+        }
+        userNameEt.setText(userName)
+        userSignEt.setText(userSign)
     }
 
     /**
@@ -72,6 +102,13 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView,
     private fun initView() {
         userIconView.onClick {
             showAlertView()
+        }
+
+        headerBar.getRightText().onClick {
+            mPresenter.editUser(userIcon = remoteFileUrl,
+                    userName = userNameEt.text.toString(),
+                    gender = if (genderMaleRb.isChecked) "0" else "1",
+                    sign = userSignEt.text.toString())
         }
     }
 
@@ -113,14 +150,22 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView,
      */
     override fun onGetUploadTokenResult(result: String) {
         if (localFilePath == null) return
+        showLoading()
         uploadManager.put(localFilePath, null, result, object : UpCompletionHandler {
             override fun complete(key: String?, info: ResponseInfo?, response: JSONObject?) {
                 remoteFileUrl = "${BaseConstant.IMAGE_SERVER_ADDRESS}${response?.get("hash")}"
-                Log.e("Cheng", remoteFileUrl)
+                hideLoading()
                 GlideUtils.loadUrlImage(this@UserInfoActivity, remoteFileUrl, userIconIv)
             }
 
         }, null)
+    }
+
+    /**
+     * 保存用户信息成功
+     */
+    override fun onEditUserTokenResult(userInfo: UserInfo) {
+        UserPrefsUtils.putUserInfo(userInfo)
     }
 
     /**

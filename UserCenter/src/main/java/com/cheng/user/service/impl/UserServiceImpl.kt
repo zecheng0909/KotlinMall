@@ -52,4 +52,12 @@ class UserServiceImpl @Inject constructor() : UserService {
                 .convertBoolean()
     }
 
+    /**
+     * 修改用户信息
+     */
+    override fun editUser(userIcon: String, userName: String, gender: String, sign: String): Observable<UserInfo> {
+        return repository.editUser(userIcon = userIcon, userName = userName, gender = gender, sign = sign)
+                .convert()
+    }
+
 }

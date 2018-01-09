@@ -6,10 +6,12 @@ import com.cheng.baselibrary.common.AppManager
 import com.cheng.baselibrary.ext.enable
 import com.cheng.baselibrary.ui.activity.BaseMvpActivity
 import com.cheng.user.R
+import com.cheng.user.data.protocol.UserInfo
 import com.cheng.user.injection.component.DaggerUserComponent
 import com.cheng.user.injection.module.UserModule
 import com.cheng.user.presenter.LoginPresenter
 import com.cheng.user.presenter.view.LoginView
+import com.kotlin.user.utils.UserPrefsUtils
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
@@ -80,8 +82,9 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView,
     /**
      * 登录成功回调
      */
-    override fun onLoginResult(message: String) {
-        toast(message)
+    override fun onLoginResult(userInfo: UserInfo) {
+        toast("登录成功")
+        UserPrefsUtils.putUserInfo(userInfo)
         startActivity<UserInfoActivity>()
     }
 
