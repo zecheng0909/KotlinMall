@@ -43,8 +43,8 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView,
         loginBtn.enable(pwdEt, ::isBtnEnabled)
 
         loginBtn.setOnClickListener(this)
+        forgetPwdTv.setOnClickListener(this)
         headerBar.getRightText().setOnClickListener(this)
-
     }
 
     /**
@@ -69,6 +69,10 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView,
             loginBtn -> {
                 mPresenter.login(mobile = mobileEt.text.toString(),
                         pwd = pwdEt.text.toString(), pushId = "")
+            }
+
+            forgetPwdTv -> {
+                startActivity<ForgetPwdActivity>()
             }
         }
     }

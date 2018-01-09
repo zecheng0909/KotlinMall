@@ -1,9 +1,7 @@
 package com.cheng.user.data.api
 
 import com.cheng.baselibrary.data.protocol.BaseResponse
-import com.cheng.user.data.protocol.LoginRequest
-import com.cheng.user.data.protocol.RegisterRequest
-import com.cheng.user.data.protocol.UserInfo
+import com.cheng.user.data.protocol.*
 import retrofit2.http.Body
 import retrofit2.http.POST
 import rx.Observable
@@ -22,4 +20,10 @@ interface UserApi {
 
     @POST("userCenter/login")
     fun login(@Body loginRequest: LoginRequest): Observable<BaseResponse<UserInfo>>
+
+    @POST("userCenter/forgetPwd")
+    fun forgetPwd(@Body forgetPwdRequest: ForgetPwdRequest): Observable<BaseResponse<String>>
+
+    @POST("userCenter/resetPwd")
+    fun resetPwd(@Body resetPwdRequest: ResetPwdRequest): Observable<BaseResponse<String>>
 }

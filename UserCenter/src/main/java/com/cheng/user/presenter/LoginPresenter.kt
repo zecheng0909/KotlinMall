@@ -23,7 +23,6 @@ class LoginPresenter @Inject constructor() : BasePresenter<LoginView>() {
     fun login(mobile: String, pwd: String, pushId: String) {
 
         if (!checkNerWork()) return
-
         mView.showLoading()
         service.login(mobile = mobile, pwd = pwd, pushId = pushId)
                 .execute(object : BaseSubscriber<UserInfo>(mView) {

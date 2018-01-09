@@ -15,10 +15,10 @@ interface UserService {
     /**
      * 注册
      * @mobile 手机号
-     * @verifyCode 验证码
      * @pwd 密码
+     * @verifyCode 验证码
      */
-    fun register(mobile: String, verifyCode: String, pwd: String): Observable<Boolean>
+    fun register(mobile: String, pwd: String, verifyCode: String): Observable<Boolean>
 
     /**
      * 登录
@@ -27,5 +27,19 @@ interface UserService {
      * @pushId 推送ID
      */
     fun login(mobile: String, pwd: String, pushId: String): Observable<UserInfo>
+
+    /**
+     * 找回密码
+     * @mobile 手机号
+     * @verifyCode 验证码
+     */
+    fun forgetPwd(mobile: String, verifyCode: String): Observable<Boolean>
+
+    /**
+     * 重置密码
+     * @mobile 手机号
+     * @pwd 密码
+     */
+    fun resetPwd(mobile: String, pwd: String): Observable<Boolean>
 
 }

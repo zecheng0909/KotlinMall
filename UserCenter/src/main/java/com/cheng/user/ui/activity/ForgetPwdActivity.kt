@@ -2,33 +2,31 @@ package com.cheng.user.ui.activity
 
 import android.os.Bundle
 import android.view.View
-import com.cheng.baselibrary.common.AppManager
 import com.cheng.baselibrary.ext.enable
-import com.cheng.baselibrary.ext.onClick
 import com.cheng.baselibrary.ui.activity.BaseMvpActivity
 import com.cheng.user.R
 import com.cheng.user.injection.component.DaggerUserComponent
 import com.cheng.user.injection.module.UserModule
-import com.cheng.user.presenter.RegisterPresenter
-import com.cheng.user.presenter.view.RegisterView
-import com.kotlin.base.widgets.VerifyButton
-import kotlinx.android.synthetic.main.activity_register.*
+import com.cheng.user.presenter.ForgetPwdPresenter
+import com.cheng.user.presenter.view.ForgetPwdView
+import kotlinx.android.synthetic.main.activity_forget_pwd.*
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 /**
  * User: Cheng
- * Date: 2018-01-03
- * Time: 17:37
- * Describe: 注册页
+ * Date: 2018-01-09
+ * Time: 11:42
+ * Describe: 忘记密码页面
  */
 
 
-class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView,
+class ForgetPwdActivity : BaseMvpActivity<ForgetPwdPresenter>(), ForgetPwdView,
         View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+        setContentView(R.layout.activity_forget_pwd)
 
         initView()
     }
@@ -38,13 +36,11 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView,
      */
     private fun initView() {
 
-        registerBtn.enable(mobileEt, ::isBtnEnabled)
-        registerBtn.enable(verifyCodeEt, ::isBtnEnabled)
-        registerBtn.enable(pwdEt, ::isBtnEnabled)
-        registerBtn.enable(pwdConfirmEt, ::isBtnEnabled)
+        nextBtn.enable(mobileEt, ::isBtnEnabled)
+        nextBtn.enable(verifyCodeEt, ::isBtnEnabled)
 
         verifyCodeBtn.setOnClickListener(this)
-        registerBtn.setOnClickListener(this)
+        nextBtn.setOnClickListener(this)
     }
 
     /**
@@ -67,22 +63,18 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView,
                 toast("发送验证码成功")
             }
 
-            registerBtn -> {
-                if (pwdEt.text.toString() != pwdConfirmEt.text.toString()) {
-                    toast("两次输入密码不正确")
-                    return
-                }
-                mPresenter.register(mobileEt.text.toString(),
-                        pwdEt.text.toString(), verifyCodeEt.text.toString())
+            nextBtn -> {
+                mPresenter.forgetPwd(mobile = mobileEt.text.toString(),
+                        verifyCode = verifyCodeEt.text.toString())
             }
         }
     }
 
     /**
-     * 注册成功的回调
+     * 验证成功的回调
      */
-    override fun onRegisterResult(message: String) {
-        toast(message)
+    override fun onForgetPwdResult(message: String) {
+        startActivity<ResetPwdActivity>("mobile" to mobileEt.text.toString())
     }
 
     /**
@@ -90,8 +82,6 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView,
      */
     private fun isBtnEnabled(): Boolean {
         return mobileEt.text.isNullOrEmpty().not() and
-                verifyCodeEt.text.isNullOrEmpty().not() and
-                pwdEt.text.isNullOrEmpty().not() and
-                pwdConfirmEt.text.isNullOrEmpty().not()
+                verifyCodeEt.text.isNullOrEmpty().not()
     }
 }
