@@ -1,7 +1,10 @@
 package com.cheng.user.presenter
 
+import com.cheng.baselibrary.ext.execute
 import com.cheng.baselibrary.presenter.BasePresenter
+import com.cheng.baselibrary.rx.BaseSubscriber
 import com.cheng.user.presenter.view.UserInfoView
+import com.cheng.user.service.UploadService
 import com.cheng.user.service.UserService
 import javax.inject.Inject
 
@@ -15,6 +18,14 @@ import javax.inject.Inject
 class UserInfoPresenter @Inject constructor() : BasePresenter<UserInfoView>() {
 
     @Inject
-    lateinit var service: UserService
+    lateinit var service: UploadService
+
+    fun getUploadToken() {
+        service.getUploadToken().execute(object : BaseSubscriber<String>(mView) {
+            override fun onNext(t: String) {
+                mView.onGetUploadTokenResult(t)
+            }
+        }, lifecycleProvider)
+    }
 
 }

@@ -86,4 +86,7 @@ dependencies {
 
     //AlertView
     compile "com.bigkoo:alertview:$alertview_version"
+
+    //七牛云
+    compile "com.qiniu:qiniu-android-sdk:7.3.+"
 }
