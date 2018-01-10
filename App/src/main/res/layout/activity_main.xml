@@ -5,6 +5,10 @@
     android:gravity="bottom"
     android:orientation="vertical">
 
+    <FrameLayout
+        android:id="@+id/contentFl"
+        style="@style/MatchMatch" />
+
     <com.cheng.baselibrary.widgets.BottomNavBar
         android:id="@+id/bottomNavBar"
         style="@style/MatchWrap" />

@@ -55,12 +55,14 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView,
     private var localFilePath: String? = null
     private lateinit var remoteFileUrl: String
 
+    //记录个人信息的变量
     private var userIcon: String? = null
     private var userName: String? = null
     private var userMobile: String? = null
     private var userGender: String? = null
     private var userSign: String? = null
 
+    //七牛云
     private val uploadManager: UploadManager by lazy { UploadManager() }
 
     override fun onCreate(savedInstanceState: Bundle?) {

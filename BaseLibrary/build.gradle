@@ -47,11 +47,7 @@ dependencies {
 
     // AnKo Commons
     compile "org.jetbrains.anko:anko-commons:$anko_version"
-
-    // Support-v4 (only AnKo Commons)
     compile "org.jetbrains.anko:anko-support-v4-commons:$anko_version"
-
-    //Appcompat-v7 (only AnKo Commons)
     compile "org.jetbrains.anko:anko-appcompat-v7-commons:$anko_version"
 
     //RxKotlin
@@ -92,4 +88,7 @@ dependencies {
 
     //BottomNavigation
     compile "com.ashokvarma.android:bottom-navigation-bar:$bottom_nav_bar_version"
+
+    //Banner
+    compile "com.youth.banner:banner:$banner_version"
 }

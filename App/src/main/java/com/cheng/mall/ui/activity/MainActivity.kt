@@ -3,6 +3,7 @@ package com.cheng.mall.ui.activity
 import android.os.Bundle
 import com.cheng.baselibrary.ui.activity.BaseActivity
 import com.cheng.mall.R
+import com.cheng.mall.ui.fragment.HomeFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -26,5 +27,12 @@ class MainActivity : BaseActivity() {
 //                .subscribe {
 //                    bottomNavBar.checkMsgBadge(true)
 //                }
+        initView()
+    }
+
+    private fun initView() {
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.contentFl, HomeFragment())
+                .commit()
     }
 }

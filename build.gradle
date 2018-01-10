@@ -22,8 +22,8 @@ buildscript {
     ext.takephoto_version = '4.0.3'
 
     ext.alertview_version = '1.0.3'
-
     ext.bottom_nav_bar_version = '2.0.4'
+    ext.banner_version = '1.4.10'
 
     repositories {
         google()
