@@ -89,4 +89,7 @@ dependencies {
 
     //七牛云
     compile "com.qiniu:qiniu-android-sdk:7.3.+"
+
+    //BottomNavigation
+    compile "com.ashokvarma.android:bottom-navigation-bar:$bottom_nav_bar_version"
 }
