@@ -80,6 +80,7 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView,
      */
     override fun onRegisterResult(message: String) {
         toast(message)
+        finish()
     }
 
     /**

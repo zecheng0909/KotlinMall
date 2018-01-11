@@ -9,8 +9,11 @@ import com.cheng.baselibrary.ext.loadUrl
 import com.cheng.mall.R
 import kotlinx.android.synthetic.main.layout_topic_item.view.*
 
-/*
-    话题数据
+/**
+ * User: Cheng
+ * Date: 2018-01-11
+ * Time: 12:45
+ * Describe: 话题 pager数据适配
  */
 class TopicAdapter(private val context: Context, private val list: List<String>) : PagerAdapter() {
 

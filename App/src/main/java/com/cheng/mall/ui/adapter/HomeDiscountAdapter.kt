@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.layout_home_discount_item.view.*
  * User: Cheng
  * Date: 2018-01-10
  * Time: 20:47
- * Describe: 首页折扣列表
+ * Describe: 首页折扣列表适配
  */
 
 class HomeDiscountAdapter(context: Context) :

@@ -27,8 +27,6 @@ import org.jetbrains.anko.toast
 class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView,
         View.OnClickListener {
 
-    var time: Long = 0
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -85,24 +83,7 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView,
     override fun onLoginResult(userInfo: UserInfo) {
         toast("登录成功")
         UserPrefsUtils.putUserInfo(userInfo)
-        startActivity<UserInfoActivity>()
-    }
-
-    override fun onBackPressed() {
-        doubleBackExit()
-    }
-
-    /**
-     * 双击back退出app
-     */
-    private fun doubleBackExit() {
-        val currentTime = System.currentTimeMillis()
-        if (currentTime - time > 2000) {
-            toast("再次点击返回键退出应用")
-            time = currentTime
-        } else {
-            AppManager.appManager.exitApp(this)
-        }
+        finish()
     }
 
     /**

@@ -9,7 +9,7 @@
         android:orientation="horizontal">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/mUserIconIv"
+            android:id="@+id/userIconIv"
             android:layout_width="@dimen/common_icon_width"
             android:layout_height="@dimen/common_icon_height"
             android:layout_gravity="center_vertical"
@@ -17,7 +17,7 @@
             android:src="@drawable/icon_default_user" />
 
         <TextView
-            android:id="@+id/mUserNameTv"
+            android:id="@+id/userNameTv"
             style="@style/WrapWrap"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/common_margin"
@@ -74,7 +74,7 @@
         android:text="分享" />
 
     <TextView
-        android:id="@+id/mSettingTv"
+        android:id="@+id/settingTv"
         style="@style/MeItemStyle"
         android:drawableLeft="@drawable/icon_setting"
         android:text="设置" />

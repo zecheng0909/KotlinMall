@@ -40,6 +40,9 @@ class HomeFragment : BaseFragment() {
         initTopic()
     }
 
+    /**
+     * 初始化广告轮播
+     */
     private fun initBanner() {
         //设置banner样式
         homeBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR)
@@ -62,10 +65,16 @@ class HomeFragment : BaseFragment() {
         homeBanner.start()
     }
 
+    /**
+     * 初始化滚动公告栏
+     */
     private fun initNews() {
         newsFlipperView.setData(arrayOf("垂死病中惊坐起", "谈笑风生又一年"))
     }
 
+    /**
+     * 初始化折扣列表
+     */
     private fun initDiscount() {
         val layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         val adapter = HomeDiscountAdapter(activity)

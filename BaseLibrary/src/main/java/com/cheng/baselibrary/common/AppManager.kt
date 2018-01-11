@@ -49,7 +49,7 @@ class AppManager private constructor() {
     /**
      * 将所有activity移出栈
      */
-    fun finishAllActivity() {
+    private fun finishAllActivity() {
         activityStack.forEach { activity ->
             activity.finish()
         }

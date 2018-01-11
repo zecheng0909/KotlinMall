@@ -51,9 +51,9 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView,
     private lateinit var invokeParam: InvokeParam
     private lateinit var takePhoto: TakePhotoImpl
 
-    private lateinit var tempFile: File
+    private var tempFile: File? = null
     private var localFilePath: String? = null
-    private lateinit var remoteFileUrl: String
+    private var remoteFileUrl: String? = null
 
     //记录个人信息的变量
     private var userIcon: String? = null
@@ -85,7 +85,7 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView,
         userMobile = AppPrefsUtils.getString(ProviderConstant.KEY_SP_USER_MOBILE)
         userGender = AppPrefsUtils.getString(ProviderConstant.KEY_SP_USER_GENDER)
         userSign = AppPrefsUtils.getString(ProviderConstant.KEY_SP_USER_SIGN)
-        remoteFileUrl = localFilePath!!
+        remoteFileUrl = userIcon
         if (userIcon != "") GlideUtils.loadUrlImage(this, userIcon!!, userIconIv)
         userNameEt.setText(userName)
         userMobileTv.text = userMobile
@@ -107,7 +107,7 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView,
         }
 
         headerBar.getRightText().onClick {
-            mPresenter.editUser(userIcon = remoteFileUrl,
+            mPresenter.editUser(userIcon = remoteFileUrl!!,
                     userName = userNameEt.text.toString(),
                     gender = if (genderMaleRb.isChecked) "0" else "1",
                     sign = userSignEt.text.toString())
@@ -157,7 +157,7 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView,
             override fun complete(key: String?, info: ResponseInfo?, response: JSONObject?) {
                 remoteFileUrl = "${BaseConstant.IMAGE_SERVER_ADDRESS}${response?.get("hash")}"
                 hideLoading()
-                GlideUtils.loadUrlImage(this@UserInfoActivity, remoteFileUrl, userIconIv)
+                GlideUtils.loadUrlImage(this@UserInfoActivity, remoteFileUrl!!, userIconIv)
             }
 
         }, null)
@@ -168,6 +168,7 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView,
      */
     override fun onEditUserTokenResult(userInfo: UserInfo) {
         UserPrefsUtils.putUserInfo(userInfo)
+        finish()
     }
 
     /**
