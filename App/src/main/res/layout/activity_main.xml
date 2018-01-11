@@ -7,7 +7,8 @@
 
     <FrameLayout
         android:id="@+id/contentFl"
-        style="@style/MatchMatch" />
+        style="@style/MatchMatch"
+        android:layout_weight="1"/>
 
     <com.cheng.baselibrary.widgets.BottomNavBar
         android:id="@+id/bottomNavBar"
