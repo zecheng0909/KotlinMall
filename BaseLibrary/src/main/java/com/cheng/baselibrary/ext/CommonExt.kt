@@ -3,10 +3,12 @@ package com.cheng.baselibrary.ext
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import com.cheng.baselibrary.data.protocol.BaseResponse
 import com.cheng.baselibrary.rx.BaseFunc
 import com.cheng.baselibrary.rx.BaseFuncBoolean
 import com.cheng.baselibrary.rx.BaseSubscriber
+import com.kotlin.base.utils.GlideUtils
 import com.kotlin.base.widgets.DefaultTextWatcher
 import com.trello.rxlifecycle.LifecycleProvider
 import com.trello.rxlifecycle.kotlin.bindToLifecycle
@@ -69,4 +71,11 @@ fun Button.enable(et: EditText, action: () -> Boolean) {
             btn.isEnabled = action()
         }
     })
+}
+
+/**
+ * ImageView加载网络图片
+ */
+fun ImageView.loadUrl(url: String) {
+    GlideUtils.loadUrlImage(context, url, this)
 }

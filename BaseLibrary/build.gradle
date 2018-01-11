@@ -14,7 +14,6 @@ android {
     compileSdkVersion 26
 
 
-
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 26
@@ -42,8 +41,11 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
+    //CardView
+    compile 'com.android.support:cardview-v7:26.1.0'
+
     //RecyclerView
-    implementation 'com.android.support:recyclerview-v7:26.1.0'
+    compile 'com.android.support:recyclerview-v7:26.1.0'
 
     // AnKo Commons
     compile "org.jetbrains.anko:anko-commons:$anko_version"
@@ -91,4 +93,10 @@ dependencies {
 
     //Banner
     compile "com.youth.banner:banner:$banner_version"
+
+    //TriangleLabelView
+    compile "com.github.shts:TriangleLabelView:$triangle_label_view_version"
+
+    //Android-CoverFlow
+    compile 'com.github.crosswall:Android-Coverflow:release-v1.0.4'
 }

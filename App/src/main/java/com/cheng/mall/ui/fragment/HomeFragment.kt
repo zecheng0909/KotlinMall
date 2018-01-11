@@ -1,43 +1,43 @@
 package com.cheng.mall.ui.fragment
 
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.cheng.baselibrary.ui.fragment.BaseFragment
 import com.cheng.baselibrary.widgets.BannerImageLoader
 import com.cheng.mall.R
-import com.kotlin.mall.common.HOME_BANNER_FOUR
-import com.kotlin.mall.common.HOME_BANNER_ONE
-import com.kotlin.mall.common.HOME_BANNER_THREE
-import com.kotlin.mall.common.HOME_BANNER_TWO
-import com.youth.banner.Banner
+import com.cheng.mall.ui.adapter.HomeDiscountAdapter
+import com.kotlin.mall.common.*
+import com.kotlin.mall.ui.adapter.TopicAdapter
 import com.youth.banner.BannerConfig
 import com.youth.banner.Transformer
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_home.view.*
+import me.crosswall.lib.coverflow.CoverFlow
 
 
 /**
  * User: Cheng
  * Date: 2018-01-10
  * Time: 16:45
- * Describe:
+ * Describe: 首页Fragment
  */
 
 class HomeFragment : BaseFragment() {
 
-    private lateinit var homeBanner: Banner
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_home, null)
+    }
 
-        val view = inflater?.inflate(R.layout.fragment_home, null)
-
-        homeBanner = view!!.homeBanner
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         initBanner()
-
-        return view
+        initNews()
+        initDiscount()
+        initTopic()
     }
 
     private fun initBanner() {
@@ -60,6 +60,31 @@ class HomeFragment : BaseFragment() {
         homeBanner.setIndicatorGravity(BannerConfig.RIGHT)
         //banner设置方法全部调用完毕时最后调用
         homeBanner.start()
+    }
+
+    private fun initNews() {
+        newsFlipperView.setData(arrayOf("垂死病中惊坐起", "谈笑风生又一年"))
+    }
+
+    private fun initDiscount() {
+        val layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        val adapter = HomeDiscountAdapter(activity)
+        adapter.setData(mutableListOf(HOME_DISCOUNT_ONE, HOME_DISCOUNT_TWO, HOME_DISCOUNT_THREE,
+                HOME_DISCOUNT_FOUR, HOME_DISCOUNT_FIVE))
+        homeDiscountRv.layoutManager = layoutManager
+        homeDiscountRv.adapter = adapter
+    }
+
+    /**
+     * 初始化主题
+     */
+    private fun initTopic() {
+        //话题
+        topicPager.adapter = TopicAdapter(context, listOf(HOME_TOPIC_ONE, HOME_TOPIC_TWO, HOME_TOPIC_THREE, HOME_TOPIC_FOUR, HOME_TOPIC_FIVE))
+        topicPager.currentItem = 1
+        topicPager.offscreenPageLimit = 5
+
+        CoverFlow.Builder().with(topicPager).scale(0.3f).pagerMargin(-30.0f).spaceSize(0.0f).build()
     }
 
 }
