@@ -31,9 +31,11 @@ abstract class BaseMvpFragment<T : BasePresenter<*>> : BaseFragment(), BaseView 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        loadingDialog = ProgressLoading.create(activity)
+        initActivityComponent()
 
         injectComponent()
+
+        loadingDialog = ProgressLoading.create(activity)
     }
 
     override fun showLoading() {

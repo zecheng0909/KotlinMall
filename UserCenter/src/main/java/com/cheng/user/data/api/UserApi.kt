@@ -11,7 +11,7 @@ import rx.Observable
  * User: Cheng
  * Date: 2018-01-04
  * Time: 16:00
- * Describe: Retrofit需要的Api
+ * Describe: User模块,访问网络需要的api
  */
 
 interface UserApi {

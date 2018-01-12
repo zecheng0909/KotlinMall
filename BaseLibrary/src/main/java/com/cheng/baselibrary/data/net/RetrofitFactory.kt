@@ -67,7 +67,7 @@ class RetrofitFactory private constructor() {
         return Interceptor { chain ->
             val request = chain.request()
                     .newBuilder()
-                    .addHeader("Content-Type", "application/json")
+                    .addHeader("Content_Type", "application/json")
                     .addHeader("charset", "UTF-8")
                     .addHeader("token", AppPrefsUtils.getString(BaseConstant.KEY_SP_TOKEN))
                     .build()

@@ -1,17 +1,20 @@
 package com.cheng.baselibrary.ext
 
+import android.graphics.drawable.AnimationDrawable
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import com.cheng.baselibrary.R
 import com.cheng.baselibrary.data.protocol.BaseResponse
 import com.cheng.baselibrary.rx.BaseFunc
 import com.cheng.baselibrary.rx.BaseFuncBoolean
 import com.cheng.baselibrary.rx.BaseSubscriber
+import com.kennyc.view.MultiStateView
 import com.kotlin.base.utils.GlideUtils
 import com.kotlin.base.widgets.DefaultTextWatcher
 import com.trello.rxlifecycle.LifecycleProvider
-import com.trello.rxlifecycle.kotlin.bindToLifecycle
+import org.jetbrains.anko.find
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
@@ -20,7 +23,7 @@ import rx.schedulers.Schedulers
  * User: Cheng
  * Date: 2018-01-03
  * Time: 17:43
- * Describe:都是一些公共扩展方法
+ * Describe: 都是一些公共扩展方法
  */
 
 
@@ -78,4 +81,21 @@ fun Button.enable(et: EditText, action: () -> Boolean) {
  */
 fun ImageView.loadUrl(url: String) {
     GlideUtils.loadUrlImage(context, url, this)
+}
+
+/**
+ * 控件是否显示
+ */
+fun View.isVisible(isVisible: Boolean) {
+    this.visibility = if (isVisible) View.VISIBLE else View.GONE
+}
+
+/**
+ * 多状态视图开始显示加载动画
+ */
+fun MultiStateView.srartLoading() {
+    this.viewState = MultiStateView.VIEW_STATE_LOADING
+    val loadingView = this.getView(MultiStateView.VIEW_STATE_LOADING)
+    val animationBackground = loadingView!!.find<View>(R.id.loading_anim_view).background
+    (animationBackground as AnimationDrawable).start()
 }

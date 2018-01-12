@@ -14,9 +14,12 @@ class BaseConstant {
         /**
          * BaseUrl
          */
-        const val SERVER_ADDRESS = "http://192.168.199.212:8080/CMall/"
+//        const val SERVER_ADDRESS = "http://192.168.199.212:8080/CMall/"
 //        const val SERVER_ADDRESS = "http://10.0.2.10:8080/CMall/"
-//        const val SERVER_ADDRESS = "http://192.168.0.111:8080/CMall/"
+        const val SERVER_ADDRESS = "http://192.168.0.106:8080/CMall/"
+
+
+//        const val SERVER_ADDRESS = "http://120.79.59.193:8080/Kotlin_Server/"
 
         /**
          * 七牛服务地址

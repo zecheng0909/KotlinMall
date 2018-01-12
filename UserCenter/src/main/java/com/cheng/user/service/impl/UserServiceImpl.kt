@@ -23,7 +23,7 @@ class UserServiceImpl @Inject constructor() : UserService {
     /**
      * 注册
      */
-    override fun register(mobile: String, verifyCode: String, pwd: String): Observable<Boolean> {
+    override fun register(mobile: String, pwd: String, verifyCode: String): Observable<Boolean> {
         return repository.register(mobile = mobile, pwd = pwd, verifyCode = verifyCode)
                 .convertBoolean()
     }

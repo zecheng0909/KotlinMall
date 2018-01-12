@@ -5,6 +5,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.cheng.baselibrary.common.AppManager
 import com.cheng.baselibrary.ui.activity.BaseActivity
 import com.cheng.baselibrary.ui.fragment.BaseFragment
+import com.cheng.goods.ui.fragment.CategoryFragment
 import com.cheng.mall.R
 import com.cheng.mall.ui.fragment.HomeFragment
 import com.cheng.mall.ui.fragment.MeFragment
@@ -19,7 +20,7 @@ class MainActivity : BaseActivity() {
     private val fragmentStack: Stack<BaseFragment> by lazy { Stack<BaseFragment>() }
 
     private val homeFragment: HomeFragment by lazy { HomeFragment() }
-    private val categoryFragment: HomeFragment by lazy { HomeFragment() }
+    private val categoryFragment: CategoryFragment by lazy { CategoryFragment() }
     private val cartFragment: HomeFragment by lazy { HomeFragment() }
     private val msgFragment: HomeFragment by lazy { HomeFragment() }
     private val meFragment: MeFragment by lazy { MeFragment() }
