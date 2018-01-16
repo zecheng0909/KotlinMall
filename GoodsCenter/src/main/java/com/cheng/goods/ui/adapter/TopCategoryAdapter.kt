@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.layout_top_category_item.view.*
  * User: Cheng
  * Date: 2018-01-11
  * Time: 22:54
- * Describe: 一级分类列表的适配
+ * Describe: 一级分类列表的适配器
  */
 
 class TopCategoryAdapter(context: Context) :

@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.layout_second_category_item.view.*
  * User: Cheng
  * Date: 2018-01-11
  * Time: 23:08
- * Describe: 二级分类列表的适配
+ * Describe: 二级分类列表的适配器
  */
 
 class SecondCategoryAdapter(context: Context) :

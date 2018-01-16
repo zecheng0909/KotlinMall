@@ -15,11 +15,13 @@ import com.cheng.goods.injection.component.DaggerCategoryComponent
 import com.cheng.goods.injection.module.CategoryModule
 import com.cheng.goods.presenter.CategoryPresenter
 import com.cheng.goods.presenter.view.CategoryView
+import com.cheng.goods.ui.activity.GoodsListActivity
 import com.cheng.goods.ui.adapter.SecondCategoryAdapter
 import com.cheng.goods.ui.adapter.TopCategoryAdapter
 import com.kennyc.view.MultiStateView
 import com.kotlin.base.ui.adapter.BaseRecyclerViewAdapter
 import kotlinx.android.synthetic.main.fragment_category.*
+import org.jetbrains.anko.support.v4.startActivity
 
 /**
  * User: Cheng
@@ -89,6 +91,7 @@ class CategoryFragment : BaseMvpFragment<CategoryPresenter>(), CategoryView {
         secondCategoryAdapter
                 .setOnItemClickListener(object : BaseRecyclerViewAdapter.OnItemClickListener<CategoryInfo> {
                     override fun onItemClick(item: CategoryInfo, position: Int) {
+                        startActivity<GoodsListActivity>("categoryId" to item.id)
                     }
                 })
     }

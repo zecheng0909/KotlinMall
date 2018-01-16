@@ -1,8 +1,10 @@
 package com.cheng.goods.data.api
 
 import com.cheng.baselibrary.data.protocol.BaseResponse
-import com.cheng.goods.data.protocol.CategoryInfo
-import com.cheng.goods.data.protocol.GetCategoryRequest
+import com.kotlin.goods.data.protocol.GetGoodsDetailRequest
+import com.kotlin.goods.data.protocol.GetGoodsListByKeywordRequest
+import com.kotlin.goods.data.protocol.GetGoodsListRequest
+import com.kotlin.goods.data.protocol.GoodsInfo
 import retrofit2.http.Body
 import retrofit2.http.POST
 import rx.Observable
@@ -16,7 +18,23 @@ import rx.Observable
 
 interface GoodsApi {
 
-    @POST("category/getCategory")
-    fun getCategory(@Body getCategoryRequest: GetCategoryRequest):
-            Observable<BaseResponse<MutableList<CategoryInfo>?>>
+    /**
+     * 获取商品列表
+     */
+    @POST("goods/getGoodsList")
+    fun getGoodsList(@Body req: GetGoodsListRequest): Observable<BaseResponse<MutableList<GoodsInfo>?>>
+
+    /**
+     * 获取商品列表
+     */
+    @POST("goods/getGoodsListByKeyword")
+    fun getGoodsListByKeyword(@Body req: GetGoodsListByKeywordRequest):
+            Observable<BaseResponse<MutableList<GoodsInfo>?>>
+
+    /**
+     * 获取商品详情
+     */
+    @POST("goods/getGoodsDetail")
+    fun getGoodsDetail(@Body req: GetGoodsDetailRequest):
+            Observable<BaseResponse<GoodsInfo>>
 }

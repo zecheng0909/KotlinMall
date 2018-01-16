@@ -23,7 +23,6 @@ import org.jetbrains.anko.toast
  * Describe: 登录页
  */
 
-
 class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView,
         View.OnClickListener {
 

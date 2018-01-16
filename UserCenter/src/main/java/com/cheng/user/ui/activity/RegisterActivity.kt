@@ -19,7 +19,6 @@ import org.jetbrains.anko.toast
  * Describe: 注册页
  */
 
-
 class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView,
         View.OnClickListener {
 

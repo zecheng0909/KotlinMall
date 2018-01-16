@@ -5,6 +5,7 @@ import com.cheng.baselibrary.data.protocol.BaseResponse
 import com.cheng.goods.data.api.GoodsApi
 import com.cheng.goods.data.protocol.CategoryInfo
 import com.cheng.goods.data.protocol.GetCategoryRequest
+import com.kotlin.goods.data.api.CategoryApi
 import rx.Observable
 import javax.inject.Inject
 
@@ -18,7 +19,7 @@ import javax.inject.Inject
 class CategoryRepository @Inject constructor() {
 
     fun getCategory(parentId: Int): Observable<BaseResponse<MutableList<CategoryInfo>?>> {
-        return RetrofitFactory.retrofitFactory.create(GoodsApi::class.java)
+        return RetrofitFactory.retrofitFactory.create(CategoryApi::class.java)
                 .getCategory(GetCategoryRequest(parentId))
     }
 }
