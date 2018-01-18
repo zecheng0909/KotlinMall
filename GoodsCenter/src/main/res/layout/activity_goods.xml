@@ -11,19 +11,18 @@
         android:id="@+id/multiStateView"
         style="@style/MultiStateStyle">
 
-        <!--<cn.bingoogolapple.refreshlayout.BGARefreshLayout-->
-        <!--android:id="@+id/mRefreshLayout"-->
-        <!--style="@style/MatchMatch">-->
+        <cn.bingoogolapple.refreshlayout.BGARefreshLayout
+            android:id="@+id/refreshLayout"
+            style="@style/MatchMatch">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/goodsListRv"
-            style="@style/commonRecyclerView"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/goodsListRv"
+                style="@style/commonRecyclerView"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
 
-        <!--</cn.bingoogolapple.refreshlayout.BGARefreshLayout>-->
+        </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
 
     </com.kennyc.view.MultiStateView>
-
 
 </LinearLayout>

@@ -10,6 +10,7 @@ import com.cheng.baselibrary.ext.isVisible
 import com.cheng.baselibrary.ext.srartLoading
 import com.cheng.baselibrary.ui.fragment.BaseMvpFragment
 import com.cheng.goods.R
+import com.cheng.goods.common.GoodsConstant
 import com.cheng.goods.data.protocol.CategoryInfo
 import com.cheng.goods.injection.component.DaggerCategoryComponent
 import com.cheng.goods.injection.module.CategoryModule
@@ -91,7 +92,7 @@ class CategoryFragment : BaseMvpFragment<CategoryPresenter>(), CategoryView {
         secondCategoryAdapter
                 .setOnItemClickListener(object : BaseRecyclerViewAdapter.OnItemClickListener<CategoryInfo> {
                     override fun onItemClick(item: CategoryInfo, position: Int) {
-                        startActivity<GoodsListActivity>("categoryId" to item.id)
+                        startActivity<GoodsListActivity>(GoodsConstant.KEY_CATEGORY_ID to item.id)
                     }
                 })
     }

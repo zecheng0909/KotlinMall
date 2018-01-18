@@ -102,4 +102,7 @@ dependencies {
 
     //MultiStateView
     compile 'com.github.Kennyc1012:MultiStateView:1.3.2'
+
+    //BGARefreshLayout
+    compile 'cn.bingoogolapple:bga-refreshlayout:1.1.8@aar'
 }
