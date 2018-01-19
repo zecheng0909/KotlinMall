@@ -7,7 +7,9 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout
 import com.cheng.baselibrary.ext.srartLoading
 import com.cheng.baselibrary.ui.activity.BaseMvpActivity
 import com.cheng.goods.R
+import com.cheng.goods.common.GoodsConstant
 import com.cheng.goods.common.GoodsConstant.Companion.KEY_CATEGORY_ID
+import com.cheng.goods.common.GoodsConstant.Companion.KEY_GOODS_KEYWORD
 import com.cheng.goods.injection.component.DaggerGoodsCompoent
 import com.cheng.goods.injection.module.GoodsModule
 import com.cheng.goods.presenter.GoodsListPresenter
@@ -39,6 +41,7 @@ class GoodsListActivity : BaseMvpActivity<GoodsListPresenter>(),
         setContentView(R.layout.activity_goods)
 
         initView()
+        multiStateView.srartLoading()
         loadData()
         initRefreshLayout()
     }
@@ -61,10 +64,16 @@ class GoodsListActivity : BaseMvpActivity<GoodsListPresenter>(),
 
     /**
      * 获取数据
+     * 根据intent传递进来的KEY_SEARCH_GOODS_TYPE来判断是根据关键字获取还是分类来获取
      */
     private fun loadData() {
-        multiStateView.srartLoading()
-        mPresenter.getGoodsList(categoryId = intent.getIntExtra(KEY_CATEGORY_ID, 1), pageNo = currentPageNo)
+        if (intent.getIntExtra(GoodsConstant.KEY_SEARCH_GOODS_TYPE, 0) == GoodsConstant.SEARCH_GOODS_TYPE_KEYWORD) {
+            mPresenter.getGoodsListByKeyword(keyword = intent.getStringExtra(KEY_GOODS_KEYWORD),
+                    pageNo = currentPageNo)
+        } else {
+            mPresenter.getGoodsList(categoryId = intent.getIntExtra(KEY_CATEGORY_ID, 1),
+                    pageNo = currentPageNo)
+        }
     }
 
     /**
@@ -93,7 +102,6 @@ class GoodsListActivity : BaseMvpActivity<GoodsListPresenter>(),
             } else {
                 goodsListAdapter.setData(result)
             }
-            currentPageNo++
             maxPageNo = result[0].maxPage
             multiStateView.viewState = MultiStateView.VIEW_STATE_CONTENT
         } else {
@@ -108,6 +116,7 @@ class GoodsListActivity : BaseMvpActivity<GoodsListPresenter>(),
     override fun onBGARefreshLayoutBeginLoadingMore(refreshLayout: BGARefreshLayout?): Boolean {
         return if (currentPageNo < maxPageNo) {
             loadData()
+            currentPageNo++
             true
         } else {
             false

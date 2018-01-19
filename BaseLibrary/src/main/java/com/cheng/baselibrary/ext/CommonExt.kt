@@ -86,7 +86,7 @@ fun ImageView.loadUrl(url: String) {
 /**
  * 控件是否显示
  */
-fun View.isVisible(isVisible: Boolean) {
+fun View.setVisible(isVisible: Boolean) {
     this.visibility = if (isVisible) View.VISIBLE else View.GONE
 }
 

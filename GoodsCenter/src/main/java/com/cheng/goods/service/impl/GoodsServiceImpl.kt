@@ -16,11 +16,17 @@ import javax.inject.Inject
 
 class GoodsServiceImpl @Inject constructor() : GoodsService {
 
+
     @Inject
     lateinit var goodsRepository: GoodsRepository
 
     override fun getGoodsList(categoryId: Int, pageNo: Int): Observable<MutableList<GoodsInfo>?> {
         return goodsRepository.getGoodsList(categoryId = categoryId, pageNo = pageNo)
+                .convert()
+    }
+
+    override fun getGoodsListByKeyword(keyword: String, pageNo: Int): Observable<MutableList<GoodsInfo>?> {
+        return goodsRepository.getGoodsListByKeyword(keyword = keyword, pageNo = pageNo)
                 .convert()
     }
 }

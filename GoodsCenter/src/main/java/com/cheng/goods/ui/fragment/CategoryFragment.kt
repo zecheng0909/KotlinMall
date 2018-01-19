@@ -6,7 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.cheng.baselibrary.ext.isVisible
+import com.cheng.baselibrary.ext.setVisible
 import com.cheng.baselibrary.ext.srartLoading
 import com.cheng.baselibrary.ui.fragment.BaseMvpFragment
 import com.cheng.goods.R
@@ -109,13 +109,13 @@ class CategoryFragment : BaseMvpFragment<CategoryPresenter>(), CategoryView {
             } else {
                 secondCategoryAdapter.setData(result)
                 multiStateView.viewState = MultiStateView.VIEW_STATE_CONTENT
-                topCategoryIv.isVisible(true)
-                categoryTitleTv.isVisible(true)
+                topCategoryIv.setVisible(true)
+                categoryTitleTv.setVisible(true)
             }
         } else {
             multiStateView.viewState = MultiStateView.VIEW_STATE_EMPTY
-            topCategoryIv.isVisible(false)
-            categoryTitleTv.isVisible(false)
+            topCategoryIv.setVisible(false)
+            categoryTitleTv.setVisible(false)
         }
 
     }
