@@ -19,6 +19,7 @@ import com.kotlin.base.ui.adapter.BaseRecyclerViewAdapter
 import com.kotlin.goods.data.protocol.GoodsInfo
 import com.kotlin.goods.ui.adapter.GoodsListAdapter
 import kotlinx.android.synthetic.main.activity_goods.*
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 /**
@@ -57,7 +58,7 @@ class GoodsListActivity : BaseMvpActivity<GoodsListPresenter>(),
         goodsListAdapter
                 .setOnItemClickListener(object : BaseRecyclerViewAdapter.OnItemClickListener<GoodsInfo> {
                     override fun onItemClick(item: GoodsInfo, position: Int) {
-                        toast("${item.goodsCode}")
+                        startActivity<GoodsDetailActivity>(GoodsConstant.KEY_GOODS_ID to item.id)
                     }
                 })
     }

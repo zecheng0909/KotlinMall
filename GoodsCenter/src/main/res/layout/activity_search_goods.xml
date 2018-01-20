@@ -21,6 +21,7 @@
             style="@style/WrapWrap"
             android:text="搜索"
             android:textColor="@color/common_white" />
+
     </LinearLayout>
 
     <TextView
@@ -52,5 +53,7 @@
             android:padding="@dimen/common_padding"
             android:text="清空历史搜索"
             android:textColor="@color/text_dark" />
+
     </LinearLayout>
+
 </LinearLayout>
