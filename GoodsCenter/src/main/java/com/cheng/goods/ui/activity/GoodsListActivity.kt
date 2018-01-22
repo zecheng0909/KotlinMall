@@ -10,7 +10,7 @@ import com.cheng.goods.R
 import com.cheng.goods.common.GoodsConstant
 import com.cheng.goods.common.GoodsConstant.Companion.KEY_CATEGORY_ID
 import com.cheng.goods.common.GoodsConstant.Companion.KEY_GOODS_KEYWORD
-import com.cheng.goods.injection.component.DaggerGoodsCompoent
+import com.cheng.goods.injection.component.DaggerGoodsComponent
 import com.cheng.goods.injection.module.GoodsModule
 import com.cheng.goods.presenter.GoodsListPresenter
 import com.cheng.goods.presenter.view.GoodsListView
@@ -20,7 +20,6 @@ import com.kotlin.goods.data.protocol.GoodsInfo
 import com.kotlin.goods.ui.adapter.GoodsListAdapter
 import kotlinx.android.synthetic.main.activity_goods.*
 import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.toast
 
 /**
  * User: Cheng
@@ -137,7 +136,7 @@ class GoodsListActivity : BaseMvpActivity<GoodsListPresenter>(),
      * 初始化依赖对象
      */
     override fun injectComponent() {
-        DaggerGoodsCompoent.builder()
+        DaggerGoodsComponent.builder()
                 .activityComponent(activityComponent)
                 .goodsModule(GoodsModule())
                 .build()

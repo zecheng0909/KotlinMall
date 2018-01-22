@@ -1,5 +1,6 @@
 package com.cheng.goods.service
 
+import com.cheng.baselibrary.data.protocol.BaseResponse
 import com.kotlin.goods.data.protocol.GoodsInfo
 import rx.Observable
 
@@ -15,4 +16,6 @@ interface GoodsService {
     fun getGoodsList(categoryId: Int, pageNo: Int): Observable<MutableList<GoodsInfo>?>
 
     fun getGoodsListByKeyword(keyword: String, pageNo: Int): Observable<MutableList<GoodsInfo>?>
+
+    fun getGoodsDetail(goodsId: Int): Observable<GoodsInfo>
 }

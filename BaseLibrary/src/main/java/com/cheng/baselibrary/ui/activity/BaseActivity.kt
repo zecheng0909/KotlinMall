@@ -1,8 +1,11 @@
 package com.cheng.baselibrary.ui.activity
 
 import android.os.Bundle
+import android.view.View
+import android.widget.FrameLayout
 import com.cheng.baselibrary.common.AppManager
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity
+import org.jetbrains.anko.find
 
 /**
  * User: Cheng
@@ -12,6 +15,12 @@ import com.trello.rxlifecycle.components.support.RxAppCompatActivity
  */
 
 open class BaseActivity : RxAppCompatActivity() {
+
+    val contentView: View
+        get() {
+            val content = find<FrameLayout>(android.R.id.content)
+            return content.getChildAt(0)
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

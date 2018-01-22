@@ -24,6 +24,7 @@ class GoodsListPresenter @Inject constructor() : BasePresenter<GoodsListView>() 
         if (!checkNerWork()) {
             return
         }
+        mView.showLoading()
         goodsService.getGoodsList(categoryId = categoryId, pageNo = pageNo)
                 .execute(object : BaseSubscriber<MutableList<GoodsInfo>?>(mView) {
                     override fun onNext(t: MutableList<GoodsInfo>?) {
@@ -37,6 +38,7 @@ class GoodsListPresenter @Inject constructor() : BasePresenter<GoodsListView>() 
         if (!checkNerWork()) {
             return
         }
+        mView.showLoading()
         goodsService.getGoodsListByKeyword(keyword = keyword, pageNo = pageNo)
                 .execute(object : BaseSubscriber<MutableList<GoodsInfo>?>(mView) {
                     override fun onNext(t: MutableList<GoodsInfo>?) {

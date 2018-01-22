@@ -9,7 +9,7 @@
         android:background="@color/common_blue">
 
         <ImageView
-            android:id="@+id/mLeftIv"
+            android:id="@+id/leftIv"
             style="@style/WrapMatch"
             android:paddingLeft="@dimen/common_padding"
             android:paddingRight="@dimen/common_padding"

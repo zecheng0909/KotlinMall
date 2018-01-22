@@ -16,7 +16,6 @@ import javax.inject.Inject
 
 class GoodsServiceImpl @Inject constructor() : GoodsService {
 
-
     @Inject
     lateinit var goodsRepository: GoodsRepository
 
@@ -27,6 +26,11 @@ class GoodsServiceImpl @Inject constructor() : GoodsService {
 
     override fun getGoodsListByKeyword(keyword: String, pageNo: Int): Observable<MutableList<GoodsInfo>?> {
         return goodsRepository.getGoodsListByKeyword(keyword = keyword, pageNo = pageNo)
+                .convert()
+    }
+
+    override fun getGoodsDetail(goodsId: Int): Observable<GoodsInfo> {
+        return goodsRepository.getGoodsDetail(goodsId = goodsId)
                 .convert()
     }
 }

@@ -7,12 +7,12 @@
         <LinearLayout style="@style/MatchWrap.Vertical">
 
             <ImageView
-                android:id="@+id/mGoodsDetailOneIv"
+                android:id="@+id/goodsDetailOneIv"
                 style="@style/MatchWrap"
                 android:scaleType="fitXY" />
 
             <ImageView
-                android:id="@+id/mGoodsDetailTwoIv"
+                android:id="@+id/goodsDetailTwoIv"
                 style="@style/MatchWrap"
                 android:scaleType="fitXY" />
 
