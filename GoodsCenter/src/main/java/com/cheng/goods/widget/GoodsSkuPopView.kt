@@ -8,11 +8,14 @@ import android.view.View
 import android.view.ViewGroup.LayoutParams
 import android.widget.PopupWindow
 import com.cheng.baselibrary.ext.loadUrl
-import com.cheng.baselibrary.ext.onClick
 import com.cheng.goods.R
 import com.cheng.goods.common.GoodsConstant
+import com.cheng.goods.event.GoodsSkuChangedEvent
+import com.cheng.goods.getEditText
+import com.eightbitlab.rxbus.Bus
 import com.kotlin.base.utils.YuanFenConverter
-import com.kotlin.goods.data.protocol.GoodsSku
+import com.kotlin.base.widgets.DefaultTextWatcher
+import com.kotlin.goods.data.protocol.GoodsSkuInfo
 import kotlinx.android.synthetic.main.layout_sku_pop.view.*
 
 /**
@@ -68,47 +71,43 @@ class GoodsSkuPopView(context: Activity) : PopupWindow(context), View.OnClickLis
         mRootView.mCloseIv.setOnClickListener(this)
         mRootView.mAddCartBtn.setOnClickListener(this)
 
-        mRootView.mSkuCountBtn.setCurrentNumber(1)
-//        mRootView.mSkuCountBtn.getEditText().addTextChangedListener(
-//                object :DefaultTextWatcher(){
-//                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//                        Bus.send(SkuChangedEvent())
-//                    }
-//                }
-//
-//        )
+        mRootView.skuCountBtn.setCurrentNumber(1)
 
-        mRootView.mAddCartBtn.onClick {
-            //            Bus.send(AddCartEvent())
-            dismiss()
-        }
+        mRootView.skuCountBtn.getEditText()
+                .addTextChangedListener(object : DefaultTextWatcher() {
+                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                        super.onTextChanged(s, start, before, count)
+                        Bus.send(GoodsSkuChangedEvent())
+                    }
+                })
+
     }
 
-    /*
-        设置商品图标
+    /**
+     * 设置商品图标
      */
     fun setGoodsIcon(text: String) {
         mRootView.mGoodsIconIv.loadUrl(text)
     }
 
-    /*
-        设置商品价格
+    /**
+     * 设置商品价格
      */
     fun setGoodsPrice(text: Long) {
         mRootView.mGoodsPriceTv.text = YuanFenConverter.changeF2YWithUnit(text)
     }
 
-    /*
-        设置商品编号
+    /**
+     * 设置商品编号
      */
     fun setGoodsCode(text: String) {
         mRootView.mGoodsCodeTv.text = "商品编号:" + text
     }
 
-    /*
-        设置商品SKU
+    /**
+     * 设置商品SKU
      */
-    fun setSkuData(list: List<GoodsSku>) {
+    fun setSkuData(list: List<GoodsSkuInfo>) {
         for (goodSku in list) {
             val skuView = SkuView(mContext)
             skuView.setSkuData(goodSku)
@@ -118,8 +117,8 @@ class GoodsSkuPopView(context: Activity) : PopupWindow(context), View.OnClickLis
         }
     }
 
-    /*
-        获取选中的SKU
+    /**
+     * 获取选中的SKU
      */
     fun getSelectSku(): String {
         var skuInfo = ""
@@ -129,10 +128,10 @@ class GoodsSkuPopView(context: Activity) : PopupWindow(context), View.OnClickLis
         return skuInfo.take(skuInfo.length - 1)//刪除最后一个分隔
     }
 
-    /*
-        获取商品数量
+    /**
+     * 获取商品数量
      */
-    fun getSelectCount() = mRootView.mSkuCountBtn.number
+    fun getSelectCount() = mRootView.skuCountBtn.number
 
     override fun onClick(v: View) {
         when (v.id) {

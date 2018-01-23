@@ -30,6 +30,9 @@ class GoodsDetailTabTwoFragment : BaseFragment() {
         initObserve()
     }
 
+    /**
+     * 初始化接收商品图片事件
+     */
     private fun initObserve() {
         Bus.observe<GoodsDetailImageEvent>()
                 .subscribe {

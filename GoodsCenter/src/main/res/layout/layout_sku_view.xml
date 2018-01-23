@@ -12,7 +12,7 @@
         android:textSize="@dimen/text_small_size" />
 
     <com.zhy.view.flowlayout.TagFlowLayout
-        android:id="@+id/mSkuContentView"
+        android:id="@+id/skuContentView"
         style="@style/MatchWrap"
         zhy:max_select="1" />
 
