@@ -10,6 +10,12 @@ apply plugin: 'kotlin-allopen'
 
 apply plugin: 'kotlin-noarg'
 
+kapt {
+    arguments {
+        arg("moduleName", project.getName())
+    }
+}
+
 android {
     compileSdkVersion 26
 
@@ -44,4 +50,7 @@ dependencies {
 
     //Dagger2
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
+
+    //ARouter
+    kapt "com.alibaba:arouter-compiler:$arouter_compiler_version"
 }

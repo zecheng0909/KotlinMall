@@ -1,12 +1,12 @@
 package com.cheng.goods.ui.fragment
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.cheng.baselibrary.ext.loadUrl
+import android.view.animation.Animation
+import android.view.animation.ScaleAnimation
 import com.cheng.baselibrary.ext.onClick
 import com.cheng.baselibrary.ui.activity.BaseActivity
 import com.cheng.baselibrary.ui.fragment.BaseMvpFragment
@@ -27,7 +27,6 @@ import com.kotlin.goods.widget.GoodsSkuPopView
 import com.youth.banner.BannerConfig
 import com.youth.banner.Transformer
 import kotlinx.android.synthetic.main.fragment_goods_detail_tab_one.*
-import kotlinx.android.synthetic.main.fragment_goods_detail_tab_two.*
 
 /**
  * User: Cheng
@@ -40,6 +39,11 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
 
     private lateinit var skuPopView: GoodsSkuPopView
 
+    //SKU弹层出场动画
+    private lateinit var animationStart: Animation
+    //SKU弹层退场动画
+    private lateinit var animationEnd: Animation
+
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater?.inflate(R.layout.fragment_goods_detail_tab_one, null)
     }
@@ -47,19 +51,29 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initBanner()
+        initView()
+        initAnim()
         initSKUPop()
-        initObserve()
         loadData()
+        initObserve()
 
-        skuView.onClick {
-            skuPopView.showAtLocation((activity as BaseActivity).contentView,
-                    Gravity.BOTTOM and Gravity.HORIZONTAL_GRAVITY_MASK,
-                    0, 0)
-        }
     }
 
-    @SuppressLint("SetTextI18n")
+    /*
+     初始化缩放动画
+  */
+    private fun initAnim() {
+        animationStart = ScaleAnimation(
+                1f, 0.95f, 1f, 0.95f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+        animationStart.duration = 500
+        animationStart.fillAfter = true
+
+        animationEnd = ScaleAnimation(
+                0.95f, 1f, 0.95f, 1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+        animationEnd.duration = 500
+        animationEnd.fillAfter = true
+    }
+
     private fun initObserve() {
         Bus.observe<GoodsSkuChangedEvent>()
                 .subscribe {
@@ -74,6 +88,13 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
      */
     private fun initSKUPop() {
         skuPopView = GoodsSkuPopView(activity)
+
+        skuPopView.setOnDismissListener {
+
+            (activity as BaseActivity).contentView.startAnimation(animationEnd)
+
+        }
+
     }
 
     private fun loadData() {
@@ -91,9 +112,9 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
     }
 
     /**
-     * 初始化广告轮播
+     * 初始化广告轮播以及其他视图
      */
-    private fun initBanner() {
+    private fun initView() {
         //设置banner样式
         goodsDetailBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR)
         //设置图片加载器
@@ -104,6 +125,15 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
         goodsDetailBanner.setDelayTime(2000)
         //设置指示器位置（当banner模式中有指示器时）
         goodsDetailBanner.setIndicatorGravity(BannerConfig.RIGHT)
+
+        skuView.onClick {
+            skuPopView.showAtLocation((activity as BaseActivity).contentView,
+                    Gravity.BOTTOM and Gravity.HORIZONTAL_GRAVITY_MASK,
+                    0, 0)
+
+            (activity as BaseActivity).contentView.startAnimation(animationStart)
+
+        }
     }
 
     /**
@@ -133,6 +163,11 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
         loadPopData(result)
 
         Bus.send(GoodsDetailImageEvent(result.goodsDetailOne, result.goodsDetailTwo))
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Bus.unregister(this)
     }
 
 }

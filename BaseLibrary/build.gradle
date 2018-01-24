@@ -115,4 +115,7 @@ dependencies {
 
     //FlowLayout
     compile 'com.hyman:flowlayout-lib:1.1.2'
+
+    //ARouter
+    compile "com.alibaba:arouter-api:$arouter_api_version"
 }
