@@ -19,6 +19,9 @@ fun isLogined(): Boolean {
     return AppPrefsUtils.getString(BaseConstant.KEY_SP_TOKEN).isNotEmpty()
 }
 
+/**
+ * 判断是否登录,接收一个函数,如果未登录则跳转至登录页
+ */
 fun afterLogin(action: () -> Unit) {
     if (isLogined()){
         action()

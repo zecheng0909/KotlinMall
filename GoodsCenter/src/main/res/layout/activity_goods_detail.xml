@@ -51,7 +51,7 @@
             android:textSize="@dimen/text_small_size" />
 
         <TextView
-            android:id="@+id/mEnterCartTv"
+            android:id="@+id/enterCartTv"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginBottom="2dp"

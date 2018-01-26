@@ -12,7 +12,7 @@ import javax.inject.Inject
  * User: Cheng
  * Date: 2018-01-12
  * Time: 09:55
- * Describe: 分类页面的逻辑层
+ * Describe: 分类页面逻辑层
  */
 
 class CategoryPresenter @Inject constructor() : BasePresenter<CategoryView>() {

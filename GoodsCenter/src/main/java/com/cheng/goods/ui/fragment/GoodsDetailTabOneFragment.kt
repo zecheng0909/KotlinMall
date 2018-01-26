@@ -17,6 +17,7 @@ import com.cheng.goods.common.GoodsConstant
 import com.cheng.goods.event.AddCartEvent
 import com.cheng.goods.event.GoodsDetailImageEvent
 import com.cheng.goods.event.GoodsSkuChangedEvent
+import com.cheng.goods.event.UpdateCartCountEvent
 import com.cheng.goods.injection.component.DaggerGoodsComponent
 import com.cheng.goods.injection.module.CartModule
 import com.cheng.goods.injection.module.GoodsModule
@@ -211,7 +212,7 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
      * 添加购物车成功的回调
      */
     override fun addCartResult(result: Int) {
-        toast("cart -- $result")
+        Bus.send(UpdateCartCountEvent())
     }
 
     override fun onDestroy() {

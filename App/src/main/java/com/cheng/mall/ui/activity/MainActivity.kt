@@ -5,10 +5,15 @@ import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.cheng.baselibrary.common.AppManager
 import com.cheng.baselibrary.ui.activity.BaseActivity
 import com.cheng.baselibrary.ui.fragment.BaseFragment
+import com.cheng.goods.common.GoodsConstant
+import com.cheng.goods.event.UpdateCartCountEvent
 import com.cheng.goods.ui.fragment.CategoryFragment
 import com.cheng.mall.R
 import com.cheng.mall.ui.fragment.HomeFragment
 import com.cheng.mall.ui.fragment.MeFragment
+import com.eightbitlab.rxbus.Bus
+import com.eightbitlab.rxbus.registerInBus
+import com.kotlin.base.utils.AppPrefsUtils
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.toast
 import java.util.*
@@ -29,12 +34,32 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        bottomNavBar.checkCartBadge(10)
-        bottomNavBar.checkMsgBadge(false)
+        //测试
+        bottomNavBar.checkMsgBadge(true)
 
         initFragment()
         initBottomNav()
         changeFragment(0)
+        loadCartCount()
+        initObserve()
+    }
+
+    /**
+     *  购物车数量变化事件
+     */
+    private fun initObserve() {
+        Bus.observe<UpdateCartCountEvent>()
+                .subscribe {
+                    loadCartCount()
+                }
+                .registerInBus(this)
+    }
+
+    /**
+     * 加载购物车角标数字
+     */
+    private fun loadCartCount() {
+        bottomNavBar.checkCartBadge(AppPrefsUtils.getInt(GoodsConstant.SP_CART_SIZE))
     }
 
     /**
@@ -107,5 +132,10 @@ class MainActivity : BaseActivity() {
         } else {
             AppManager.appManager.exitApp(this)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Bus.unregister(this)
     }
 }

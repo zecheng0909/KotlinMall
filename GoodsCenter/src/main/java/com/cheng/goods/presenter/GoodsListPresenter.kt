@@ -12,7 +12,7 @@ import javax.inject.Inject
  * User: Cheng
  * Date: 2018-01-15
  * Time: 17:33
- * Describe:
+ * Describe: 商品列表页逻辑层
  */
 
 class GoodsListPresenter @Inject constructor() : BasePresenter<GoodsListView>() {
