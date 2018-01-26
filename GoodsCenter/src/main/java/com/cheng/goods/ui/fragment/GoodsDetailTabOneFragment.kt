@@ -1,5 +1,6 @@
 package com.cheng.goods.ui.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -13,9 +14,11 @@ import com.cheng.baselibrary.ui.fragment.BaseMvpFragment
 import com.cheng.baselibrary.widgets.BannerImageLoader
 import com.cheng.goods.R
 import com.cheng.goods.common.GoodsConstant
+import com.cheng.goods.event.AddCartEvent
 import com.cheng.goods.event.GoodsDetailImageEvent
 import com.cheng.goods.event.GoodsSkuChangedEvent
 import com.cheng.goods.injection.component.DaggerGoodsComponent
+import com.cheng.goods.injection.module.CartModule
 import com.cheng.goods.injection.module.GoodsModule
 import com.cheng.goods.presenter.GoodsDetailPresenter
 import com.cheng.goods.presenter.view.GoodsDetailView
@@ -27,6 +30,7 @@ import com.kotlin.goods.widget.GoodsSkuPopView
 import com.youth.banner.BannerConfig
 import com.youth.banner.Transformer
 import kotlinx.android.synthetic.main.fragment_goods_detail_tab_one.*
+import org.jetbrains.anko.support.v4.toast
 
 /**
  * User: Cheng
@@ -37,11 +41,14 @@ import kotlinx.android.synthetic.main.fragment_goods_detail_tab_one.*
 
 class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), GoodsDetailView {
 
+    //商品详情数据
+    private var goodsInfo: GoodsInfo? = null
+
     private lateinit var skuPopView: GoodsSkuPopView
 
-    //SKU弹层出场动画
+    //SKU弹窗出场动画
     private lateinit var animationStart: Animation
-    //SKU弹层退场动画
+    //SKU弹窗退场动画
     private lateinit var animationEnd: Animation
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -59,9 +66,30 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
 
     }
 
-    /*
-     初始化缩放动画
-  */
+    /**
+     * 加载商品详情
+     */
+    private fun loadData() {
+        mPresenter.getGoodsDetail(activity.intent.getIntExtra(GoodsConstant.KEY_GOODS_ID, -1))
+    }
+
+    /**
+     * 添加购物车
+     */
+    private fun addCart() {
+        goodsInfo?.let {
+            mPresenter.addCart(goodsId = it.id,
+                    goodsDesc = it.goodsDesc,
+                    goodsIcon = it.goodsDefaultIcon,
+                    goodsPrice = it.goodsDefaultPrice,
+                    goodsCount = skuPopView.getSelectCount(),
+                    goodsSku = skuPopView.getSelectSku())
+        }
+    }
+
+    /**
+     * 初始化缩放动画
+     */
     private fun initAnim() {
         animationStart = ScaleAnimation(
                 1f, 0.95f, 1f, 0.95f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
@@ -74,11 +102,22 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
         animationEnd.fillAfter = true
     }
 
+    /**
+     * sku发生改变时,接收事件
+     * 添加购物车接受事件
+     */
+    @SuppressLint("SetTextI18n")
     private fun initObserve() {
         Bus.observe<GoodsSkuChangedEvent>()
                 .subscribe {
-                    skuSelectedTv.text = skuPopView.getSelectSku() + GoodsConstant.SKU_SEPARATOR +
-                            skuPopView.getSelectCount() + "个"
+                    skuSelectedTv.text = "${skuPopView.getSelectSku()}${GoodsConstant.SKU_SEPARATOR}" +
+                            "${skuPopView.getSelectCount()}个"
+                }
+                .registerInBus(this)
+
+        Bus.observe<AddCartEvent>()
+                .subscribe {
+                    addCart()
                 }
                 .registerInBus(this)
     }
@@ -95,10 +134,6 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
 
         }
 
-    }
-
-    private fun loadData() {
-        mPresenter.getGoodsDetail(activity.intent.getIntExtra(GoodsConstant.KEY_GOODS_ID, -1))
     }
 
     /**
@@ -134,6 +169,8 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
             (activity as BaseActivity).contentView.startAnimation(animationStart)
 
         }
+
+
     }
 
     /**
@@ -143,6 +180,7 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
         DaggerGoodsComponent.builder()
                 .activityComponent(activityComponent)
                 .goodsModule(GoodsModule())
+                .cartModule(CartModule())
                 .build()
                 .inject(this)
 
@@ -153,6 +191,9 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
      * 获取商品详情的回调
      */
     override fun getGoodsDetailResult(result: GoodsInfo) {
+
+        goodsInfo = result
+
         goodsDetailBanner.setImages(result.goodsBanner.split(","))
         goodsDetailBanner.start()
 
@@ -160,9 +201,17 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
         goodsPriceTv.text = YuanFenConverter.changeF2YWithUnit(result.goodsDefaultPrice)
         skuSelectedTv.text = result.goodsDefaultSku
 
+        Bus.send(GoodsDetailImageEvent(result.goodsDetailOne, result.goodsDetailTwo))
+
         loadPopData(result)
 
-        Bus.send(GoodsDetailImageEvent(result.goodsDetailOne, result.goodsDetailTwo))
+    }
+
+    /**
+     * 添加购物车成功的回调
+     */
+    override fun addCartResult(result: Int) {
+        toast("cart -- $result")
     }
 
     override fun onDestroy() {

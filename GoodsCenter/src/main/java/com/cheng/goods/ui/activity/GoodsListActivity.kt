@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout
-import com.cheng.baselibrary.ext.srartLoading
+import com.cheng.baselibrary.ext.startLoading
 import com.cheng.baselibrary.ui.activity.BaseMvpActivity
 import com.cheng.goods.R
 import com.cheng.goods.common.GoodsConstant
@@ -41,7 +41,7 @@ class GoodsListActivity : BaseMvpActivity<GoodsListPresenter>(),
         setContentView(R.layout.activity_goods)
 
         initView()
-        multiStateView.srartLoading()
+        multiStateView.startLoading()
         loadData()
         initRefreshLayout()
     }

@@ -13,4 +13,7 @@ import com.kotlin.goods.data.protocol.GoodsInfo
 interface GoodsDetailView : BaseView {
 
     fun getGoodsDetailResult(result: GoodsInfo)
+
+
+    fun addCartResult(result: Int)
 }

@@ -10,16 +10,13 @@ import dagger.Component
 
 /**
  * User: Cheng
- * Date: 2018-01-16
- * Time: 13:52
+ * Date: 2018-01-26
+ * Time: 9:52
  * Describe:
  */
 
-@Component(dependencies = [(ActivityComponent::class)], modules = [(GoodsModule::class), (CartModule::class)])
+@Component(dependencies = [(ActivityComponent::class)], modules = [(CartModule::class)])
 @PerComponentScope
-interface GoodsComponent {
+interface CartComponent {
 
-    fun inject(goodsListActivity: GoodsListActivity)
-
-    fun inject(goodsDetailTabOneFragment: GoodsDetailTabOneFragment)
 }

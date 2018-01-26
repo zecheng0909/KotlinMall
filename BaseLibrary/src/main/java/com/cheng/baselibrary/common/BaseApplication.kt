@@ -2,6 +2,7 @@ package com.cheng.baselibrary.common
 
 import android.app.Application
 import android.content.Context
+import com.alibaba.android.arouter.launcher.ARouter
 import com.cheng.baselibrary.injection.component.AppComponent
 import com.cheng.baselibrary.injection.component.DaggerAppComponent
 import com.cheng.baselibrary.injection.module.AppModule
@@ -17,7 +18,6 @@ class BaseApplication : Application() {
 
     lateinit var appComponent: AppComponent
 
-
     companion object {
 
         lateinit var context: Context
@@ -31,6 +31,14 @@ class BaseApplication : Application() {
 
         context = this
 
+        initARouter()
+
+    }
+
+    private fun initARouter() {
+        ARouter.openLog()
+        ARouter.openDebug()
+        ARouter.init(this)
     }
 
     private fun initInjection() {

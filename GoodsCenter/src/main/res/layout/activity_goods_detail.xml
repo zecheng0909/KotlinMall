@@ -65,7 +65,7 @@
             android:textSize="@dimen/text_small_size" />
 
         <Button
-            android:id="@+id/mAddCartBtn"
+            android:id="@+id/addCartBtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"

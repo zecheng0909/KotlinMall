@@ -14,7 +14,7 @@ import javax.inject.Inject
  * User: Cheng
  * Date: 2018-01-15
  * Time: 17:04
- * Describe: 商品模块网络请求层
+ * Describe: 商品模块数据层
  */
 
 class GoodsRepository @Inject constructor() {

@@ -93,7 +93,7 @@ fun View.setVisible(isVisible: Boolean) {
 /**
  * 多状态视图开始显示加载动画
  */
-fun MultiStateView.srartLoading() {
+fun MultiStateView.startLoading() {
     this.viewState = MultiStateView.VIEW_STATE_LOADING
     val loadingView = this.getView(MultiStateView.VIEW_STATE_LOADING)
     val animationBackground = loadingView!!.find<View>(R.id.loading_anim_view).background

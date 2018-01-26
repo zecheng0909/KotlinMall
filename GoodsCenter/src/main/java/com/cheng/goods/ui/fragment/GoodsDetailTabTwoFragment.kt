@@ -41,4 +41,9 @@ class GoodsDetailTabTwoFragment : BaseFragment() {
                 }
                 .registerInBus(this)
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Bus.unregister(this)
+    }
 }

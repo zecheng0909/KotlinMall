@@ -13,7 +13,7 @@ import javax.inject.Inject
  * User: Cheng
  * Date: 2018-01-12
  * Time: 09:45
- * Describe: Category模块网络请求层
+ * Describe: Category模块数据层
  */
 
 class CategoryRepository @Inject constructor() {

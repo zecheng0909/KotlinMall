@@ -10,8 +10,11 @@ import android.widget.PopupWindow
 import com.cheng.baselibrary.ext.loadUrl
 import com.cheng.goods.R
 import com.cheng.goods.common.GoodsConstant
+import com.cheng.goods.event.AddCartEvent
 import com.cheng.goods.event.GoodsSkuChangedEvent
 import com.cheng.goods.getEditText
+import com.cheng.provider.common.afterLogin
+import com.cheng.provider.common.isLogined
 import com.eightbitlab.rxbus.Bus
 import com.kotlin.base.utils.YuanFenConverter
 import com.kotlin.base.widgets.DefaultTextWatcher
@@ -135,8 +138,14 @@ class GoodsSkuPopView(context: Activity) : PopupWindow(context), View.OnClickLis
 
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.mCloseIv -> dismiss()
+            R.id.mCloseIv -> {
+                dismiss()
+            }
+
             R.id.mAddCartBtn -> {
+                afterLogin {
+                    Bus.send(AddCartEvent())
+                }
                 dismiss()
             }
         }

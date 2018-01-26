@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.cheng.baselibrary.ext.setVisible
-import com.cheng.baselibrary.ext.srartLoading
+import com.cheng.baselibrary.ext.startLoading
 import com.cheng.baselibrary.ui.fragment.BaseMvpFragment
 import com.cheng.goods.R
 import com.cheng.goods.common.GoodsConstant
@@ -125,7 +125,7 @@ class CategoryFragment : BaseMvpFragment<CategoryPresenter>(), CategoryView {
      */
     private fun loadData(parentId: Int = 0) {
         if (parentId != 0) {
-            multiStateView.srartLoading()
+            multiStateView.startLoading()
         }
         mPresenter.getCategory(parentId = parentId)
     }

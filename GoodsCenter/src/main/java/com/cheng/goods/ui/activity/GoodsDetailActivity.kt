@@ -2,10 +2,15 @@ package com.cheng.goods.ui.activity
 
 import android.os.Bundle
 import android.support.design.widget.TabLayout
-import com.cheng.baselibrary.ext.onClick
+import android.view.View
+import com.alibaba.android.arouter.launcher.ARouter
 import com.cheng.baselibrary.ui.activity.BaseActivity
 import com.cheng.goods.R
+import com.cheng.goods.event.AddCartEvent
+import com.cheng.goods.event.GoodsDetailImageEvent
 import com.cheng.goods.ui.adapter.GoodsDetailVpAdapter
+import com.cheng.provider.common.afterLogin
+import com.eightbitlab.rxbus.Bus
 import kotlinx.android.synthetic.main.activity_goods_detail.*
 
 /**
@@ -15,7 +20,7 @@ import kotlinx.android.synthetic.main.activity_goods_detail.*
  * Describe: 商品详情页
  */
 
-class GoodsDetailActivity : BaseActivity() {
+class GoodsDetailActivity : BaseActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,8 +34,22 @@ class GoodsDetailActivity : BaseActivity() {
         goodsDetailTab.setupWithViewPager(goodsDetailVp)
         goodsDetailVp.adapter = GoodsDetailVpAdapter(supportFragmentManager, this)
 
-        leftIv.onClick {
-            finish()
+        leftIv.setOnClickListener(this)
+        addCartBtn.setOnClickListener(this)
+    }
+
+    override fun onClick(v: View?) {
+        when (v) {
+            leftIv -> {
+                finish()
+            }
+
+            addCartBtn -> {
+                afterLogin {
+                    Bus.send(AddCartEvent())
+                }
+            }
+
         }
     }
 

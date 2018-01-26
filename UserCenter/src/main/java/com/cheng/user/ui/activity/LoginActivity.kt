@@ -2,9 +2,11 @@ package com.cheng.user.ui.activity
 
 import android.os.Bundle
 import android.view.View
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.cheng.baselibrary.common.AppManager
 import com.cheng.baselibrary.ext.enable
 import com.cheng.baselibrary.ui.activity.BaseMvpActivity
+import com.cheng.provider.router.RouterPath
 import com.cheng.user.R
 import com.cheng.user.data.protocol.UserInfo
 import com.cheng.user.injection.component.DaggerUserComponent
@@ -23,6 +25,7 @@ import org.jetbrains.anko.toast
  * Describe: 登录页
  */
 
+@Route(path = RouterPath.UserCenter.PATH_LOGIN)
 class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView,
         View.OnClickListener {
 
