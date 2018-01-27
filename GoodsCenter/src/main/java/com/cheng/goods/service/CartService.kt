@@ -17,4 +17,6 @@ interface CartService {
 
     fun getCartList(): Observable<MutableList<CartGoodsInfo>?>
 
+    fun deleteCartList(list: List<Int>): Observable<Boolean>
+
 }

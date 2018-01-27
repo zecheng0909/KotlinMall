@@ -1,6 +1,7 @@
 package com.cheng.goods.service.impl
 
 import com.cheng.baselibrary.ext.convert
+import com.cheng.baselibrary.ext.convertBoolean
 import com.cheng.goods.service.CartService
 import com.kotlin.goods.data.protocol.CartGoodsInfo
 import com.kotlin.goods.data.repository.CartRepository
@@ -29,4 +30,7 @@ class CartServiceImpl @Inject constructor() : CartService {
         return cartRepository.getCartList().convert()
     }
 
+    override fun deleteCartList(list: List<Int>): Observable<Boolean> {
+        return cartRepository.deleteCartList(list).convertBoolean()
+    }
 }

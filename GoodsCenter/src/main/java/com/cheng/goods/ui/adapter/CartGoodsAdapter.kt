@@ -8,7 +8,10 @@ import android.view.ViewGroup
 import com.cheng.baselibrary.ext.loadUrl
 import com.cheng.baselibrary.ext.onClick
 import com.cheng.goods.R
+import com.cheng.goods.event.CartCheckedEvent
+import com.cheng.goods.event.UpDateTotalPriceEvent
 import com.cheng.goods.getEditText
+import com.eightbitlab.rxbus.Bus
 import com.kotlin.base.ui.adapter.BaseRecyclerViewAdapter
 import com.kotlin.base.utils.YuanFenConverter
 import com.kotlin.base.widgets.DefaultTextWatcher
@@ -38,7 +41,7 @@ class CartGoodsAdapter(context: Context) : BaseRecyclerViewAdapter<CartGoodsInfo
         super.onBindViewHolder(holder, position)
         val model = dataList[position]
         //是否选中
-        holder.itemView.mCheckedCb.isChecked = model.isSelected
+        holder.itemView.checkedCb.isChecked = model.isSelected
         //加载商品图片
         holder.itemView.mGoodsIconIv.loadUrl(model.goodsIcon)
         //商品描述
@@ -48,22 +51,26 @@ class CartGoodsAdapter(context: Context) : BaseRecyclerViewAdapter<CartGoodsInfo
         //商品价格
         holder.itemView.mGoodsPriceTv.text = YuanFenConverter.changeF2YWithUnit(model.goodsPrice)
         //商品数量
-        holder.itemView.mGoodsCountBtn.setCurrentNumber(model.goodsCount)
-        //选中按钮事件
-        holder.itemView.mCheckedCb.onClick {
-            model.isSelected = holder.itemView.mCheckedCb.isChecked
-            val isAllChecked = dataList.all { it.isSelected }
-//            Bus.send(CartAllCheckedEvent(isAllChecked))
-            notifyDataSetChanged()
+        holder.itemView.goodsCountBtn.setCurrentNumber(model.goodsCount)
+
+        //是否全选
+        holder.itemView.checkedCb.onClick {
+            model.isSelected = holder.itemView.checkedCb.isChecked
+            var isAllSelected = dataList.all {
+                it.isSelected
+            }
+            Bus.send(CartCheckedEvent(isAllSelected))
+            Bus.send(UpDateTotalPriceEvent())
         }
 
-        //商品数量变化监听
-        holder.itemView.mGoodsCountBtn.getEditText().addTextChangedListener(object : DefaultTextWatcher() {
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                model.goodsCount = s.toString().toInt()
-//                Bus.send(UpdateTotalPriceEvent())
-            }
-        })
+        //数量改变
+        holder.itemView.goodsCountBtn.getEditText()
+                .addTextChangedListener(object : DefaultTextWatcher() {
+                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                        model.goodsCount = s.toString().toInt()
+                        Bus.send(UpDateTotalPriceEvent())
+                    }
+                })
 
     }
 

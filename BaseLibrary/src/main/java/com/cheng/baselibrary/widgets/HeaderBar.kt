@@ -23,23 +23,23 @@ class HeaderBar @JvmOverloads constructor(
 
     var isShowBack: Boolean = true
 
-    var titleText: String? = null
+    var titleTextView: String? = null
 
-    var rightText: String? = null
+    var rightTextView: String? = null
 
     init {
         val attributes = context.obtainStyledAttributes(attrs, R.styleable.HeaderBar)
 
         isShowBack = attributes.getBoolean(R.styleable.HeaderBar_isShowBack, true)
-        titleText = attributes.getString(R.styleable.HeaderBar_titleText)
-        rightText = attributes.getString(R.styleable.HeaderBar_rightText)
+        titleTextView = attributes.getString(R.styleable.HeaderBar_titleText)
+        rightTextView = attributes.getString(R.styleable.HeaderBar_rightText)
 
         attributes.recycle()
 
         initView()
 
         backIv.onClick {
-            if (context is Activity){
+            if (context is Activity) {
                 context.finish()
             }
         }
@@ -53,16 +53,20 @@ class HeaderBar @JvmOverloads constructor(
 
         backIv.visibility = if (isShowBack) View.VISIBLE else View.GONE
 
-        titleText?.let { titleTv.text = it }
+        titleTextView?.let { titleTv.text = it }
 
-        rightText?.let {
+        rightTextView?.let {
             rightTv.text = it
             rightTv.visibility = View.VISIBLE
         }
 
     }
 
-    fun getRightText(): TextView {
+    fun getRightView(): TextView {
         return rightTv
+    }
+
+    fun getRightText(): String {
+        return rightTv.text.toString()
     }
 }

@@ -3,7 +3,6 @@ package com.cheng.user.ui.activity
 import android.os.Bundle
 import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.cheng.baselibrary.common.AppManager
 import com.cheng.baselibrary.ext.enable
 import com.cheng.baselibrary.ui.activity.BaseMvpActivity
 import com.cheng.provider.router.RouterPath
@@ -46,7 +45,7 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView,
 
         loginBtn.setOnClickListener(this)
         forgetPwdTv.setOnClickListener(this)
-        headerBar.getRightText().setOnClickListener(this)
+        headerBar.getRightView().setOnClickListener(this)
     }
 
     /**
@@ -64,7 +63,7 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView,
 
     override fun onClick(view: View) {
         when (view) {
-            headerBar.getRightText() -> {
+            headerBar.getRightView() -> {
                 startActivity<RegisterActivity>()
             }
 

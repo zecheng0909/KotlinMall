@@ -13,4 +13,6 @@ import com.kotlin.goods.data.protocol.CartGoodsInfo
 interface CartListView : BaseView {
 
     fun onGetCartListResult(result: MutableList<CartGoodsInfo>?)
+
+    fun onDeleteCartListResult(result: Boolean)
 }

@@ -5,7 +5,7 @@
                 android:padding="@dimen/common_padding"
                 android:background="@drawable/border_bottom">
     <CheckBox
-            android:id="@+id/mCheckedCb"
+            android:id="@+id/checkedCb"
             style="@style/WrapWrap"
             android:layout_centerVertical="true"
             android:drawableLeft="@drawable/common_check_selector"
@@ -15,7 +15,7 @@
             android:layout_width="@dimen/common_icon_width"
             android:layout_height="@dimen/common_icon_height"
             android:scaleType="fitXY"
-            android:layout_toRightOf="@id/mCheckedCb"
+            android:layout_toRightOf="@id/checkedCb"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/common_margin"/>
     <TextView
@@ -43,9 +43,11 @@
             android:layout_marginTop="@dimen/common_margin_small"
             android:textColor="@color/common_red"
             android:textSize="@dimen/text_middle_size"/>
+
     <ren.qinc.numberbutton.NumberButton
-            android:id="@+id/mGoodsCountBtn"
+            android:id="@+id/goodsCountBtn"
             style="@style/WrapWrap"
             android:layout_alignTop="@id/mGoodsPriceTv"
             android:layout_alignParentRight="true"/>
+
 </RelativeLayout>

@@ -39,5 +39,21 @@ class CartListPresenter @Inject constructor() : BasePresenter<CartListView>() {
                 }, lifecycleProvider)
     }
 
+    /**
+     * 删除购物车商品
+     */
+    fun deleteCartList(list: List<Int>) {
+        if (!checkNerWork()) {
+            return
+        }
+        mView.showLoading()
+        cartService.deleteCartList(list)
+                .execute(object : BaseSubscriber<Boolean>(mView) {
+                    override fun onNext(result: Boolean) {
+                        mView.onDeleteCartListResult(result)
+                    }
+                }, lifecycleProvider)
+    }
+
 
 }
