@@ -2,6 +2,7 @@ package com.cheng.goods.service.impl
 
 import com.cheng.baselibrary.ext.convert
 import com.cheng.goods.service.CartService
+import com.kotlin.goods.data.protocol.CartGoodsInfo
 import com.kotlin.goods.data.repository.CartRepository
 import rx.Observable
 import javax.inject.Inject
@@ -22,6 +23,10 @@ class CartServiceImpl @Inject constructor() : CartService {
                          goodsPrice: Long, goodsCount: Int, goodsSku: String): Observable<Int> {
         return cartRepository.addCart(goodsId = goodsId, goodsDesc = goodsDesc, goodsIcon = goodsIcon,
                 goodsPrice = goodsPrice, goodsCount = goodsCount, goodsSku = goodsSku).convert()
+    }
+
+    override fun getCartList(): Observable<MutableList<CartGoodsInfo>?> {
+        return cartRepository.getCartList().convert()
     }
 
 }

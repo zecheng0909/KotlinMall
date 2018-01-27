@@ -7,6 +7,7 @@ import com.cheng.baselibrary.ui.activity.BaseActivity
 import com.cheng.baselibrary.ui.fragment.BaseFragment
 import com.cheng.goods.common.GoodsConstant
 import com.cheng.goods.event.UpdateCartCountEvent
+import com.cheng.goods.ui.fragment.CartListFragment
 import com.cheng.goods.ui.fragment.CategoryFragment
 import com.cheng.mall.R
 import com.cheng.mall.ui.fragment.HomeFragment
@@ -26,7 +27,7 @@ class MainActivity : BaseActivity() {
 
     private val homeFragment: HomeFragment by lazy { HomeFragment() }
     private val categoryFragment: CategoryFragment by lazy { CategoryFragment() }
-    private val cartFragment: HomeFragment by lazy { HomeFragment() }
+    private val cartFragment: CartListFragment by lazy { CartListFragment() }
     private val msgFragment: HomeFragment by lazy { HomeFragment() }
     private val meFragment: MeFragment by lazy { MeFragment() }
 

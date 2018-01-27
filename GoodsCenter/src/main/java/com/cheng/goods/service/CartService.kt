@@ -1,5 +1,6 @@
 package com.cheng.goods.service
 
+import com.kotlin.goods.data.protocol.CartGoodsInfo
 import rx.Observable
 
 /**
@@ -13,5 +14,7 @@ interface CartService {
 
     fun addCart(goodsId: Int, goodsDesc: String, goodsIcon: String, goodsPrice: Long,
                 goodsCount: Int, goodsSku: String): Observable<Int>
+
+    fun getCartList(): Observable<MutableList<CartGoodsInfo>?>
 
 }
