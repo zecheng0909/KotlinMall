@@ -36,7 +36,6 @@ import org.jetbrains.anko.support.v4.toast
 
 class CartListFragment : BaseMvpFragment<CartListPresenter>(), CartListView, View.OnClickListener {
 
-
     private var totalPrice = 0L
 
     private lateinit var cartGoodsAdapter: CartGoodsAdapter
@@ -67,6 +66,7 @@ class CartListFragment : BaseMvpFragment<CartListPresenter>(), CartListView, Vie
         allCheckedCb.setOnClickListener(this)
         mHeaderBar.getRightView().setOnClickListener(this)
         deleteBtn.setOnClickListener(this)
+        settleAccountsBtn.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -81,6 +81,10 @@ class CartListFragment : BaseMvpFragment<CartListPresenter>(), CartListView, Vie
 
             deleteBtn -> {
                 deleteCartList()
+            }
+
+            settleAccountsBtn -> {
+                submitCartList()
             }
         }
     }
@@ -107,6 +111,20 @@ class CartListFragment : BaseMvpFragment<CartListPresenter>(), CartListView, Vie
             toast("请选择需要删除的商品")
         } else {
             mPresenter.deleteCartList(deleteList)
+        }
+    }
+
+    /**
+     * 提交购物车商品
+     */
+    private fun submitCartList() {
+        val submitList = cartGoodsAdapter.dataList
+                .filter { it.isSelected }
+                .map { it }
+        if (submitList.isEmpty()) {
+            toast("请选择需要提交的商品")
+        } else {
+            mPresenter.submitCart(submitList, totalPrice)
         }
     }
 
@@ -162,8 +180,10 @@ class CartListFragment : BaseMvpFragment<CartListPresenter>(), CartListView, Vie
         if (result != null && result.size != 0) {
             cartGoodsAdapter.setData(result)
             multiStateView.viewState = MultiStateView.VIEW_STATE_CONTENT
+            mHeaderBar.getRightView().setVisible(true)
         } else {
             multiStateView.viewState = MultiStateView.VIEW_STATE_EMPTY
+            mHeaderBar.getRightView().setVisible(false)
         }
 
         AppPrefsUtils.putInt(GoodsConstant.SP_CART_SIZE, result?.size ?: 0)
@@ -175,6 +195,14 @@ class CartListFragment : BaseMvpFragment<CartListPresenter>(), CartListView, Vie
      */
     override fun onDeleteCartListResult(result: Boolean) {
         loadData()
+        refreshEditStatus()
+    }
+
+    /**
+     * 提交购物车商品的回调
+     */
+    override fun onSubmitCartListResult(result: Int) {
+        toast("$result")
     }
 
     /**
@@ -195,6 +223,13 @@ class CartListFragment : BaseMvpFragment<CartListPresenter>(), CartListView, Vie
                 .build()
                 .inject(this)
         mPresenter.mView = this
+    }
+
+    /**
+     * 设置左上角back按钮是否显示
+     */
+    fun setBackVisible(isVisible: Boolean) {
+        mHeaderBar.getLeftView().setVisible(isVisible)
     }
 
     override fun onDestroy() {

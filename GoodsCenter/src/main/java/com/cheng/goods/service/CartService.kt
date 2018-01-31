@@ -19,4 +19,6 @@ interface CartService {
 
     fun deleteCartList(list: List<Int>): Observable<Boolean>
 
+    fun submitCart(list: List<CartGoodsInfo>, totalPrice: Long): Observable<Int>
+
 }

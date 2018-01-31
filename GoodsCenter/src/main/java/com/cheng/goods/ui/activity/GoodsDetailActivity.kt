@@ -15,6 +15,7 @@ import com.eightbitlab.rxbus.Bus
 import com.eightbitlab.rxbus.registerInBus
 import com.kotlin.base.utils.AppPrefsUtils
 import kotlinx.android.synthetic.main.activity_goods_detail.*
+import org.jetbrains.anko.startActivity
 import q.rorbin.badgeview.QBadgeView
 
 /**
@@ -47,6 +48,7 @@ class GoodsDetailActivity : BaseActivity(), View.OnClickListener {
 
         leftIv.setOnClickListener(this)
         addCartBtn.setOnClickListener(this)
+        enterCartTv.setOnClickListener(this)
     }
 
     /**
@@ -56,7 +58,7 @@ class GoodsDetailActivity : BaseActivity(), View.OnClickListener {
         badgeView = QBadgeView(this)
         badgeView.badgeGravity = Gravity.END or Gravity.TOP
         badgeView.setBadgeTextSize(8F, true)
-        badgeView.setGravityOffset(18F,0F, true)
+        badgeView.setGravityOffset(18F, 0F, true)
         badgeView.bindTarget(enterCartTv)
         loadCartCount()
     }
@@ -75,7 +77,7 @@ class GoodsDetailActivity : BaseActivity(), View.OnClickListener {
     /**
      * 设置购物车角标数字
      */
-    fun loadCartCount() {
+    private fun loadCartCount() {
         badgeView.badgeNumber = AppPrefsUtils.getInt(GoodsConstant.SP_CART_SIZE)
     }
 
@@ -89,6 +91,10 @@ class GoodsDetailActivity : BaseActivity(), View.OnClickListener {
                 afterLogin {
                     Bus.send(AddCartEvent())
                 }
+            }
+
+            enterCartTv -> {
+                startActivity<CartActivity>()
             }
 
         }
