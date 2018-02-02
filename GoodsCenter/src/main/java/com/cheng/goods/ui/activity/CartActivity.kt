@@ -28,5 +28,4 @@ class CartActivity : BaseActivity() {
         val fragment = supportFragmentManager.findFragmentById(R.id.fragment_cart)
         (fragment as CartListFragment).setBackVisible(true)
     }
-
 }

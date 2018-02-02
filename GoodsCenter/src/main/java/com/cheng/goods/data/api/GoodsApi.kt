@@ -13,7 +13,7 @@ import rx.Observable
  * User: Cheng
  * Date: 2018-01-11
  * Time: 22:42
- * Describe: Goods模块,访问网络需要的api
+ * Describe: Goods模块接口
  */
 
 interface GoodsApi {

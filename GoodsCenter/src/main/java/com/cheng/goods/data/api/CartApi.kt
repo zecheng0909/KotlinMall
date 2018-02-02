@@ -13,7 +13,7 @@ import rx.Observable
  * User: Cheng
  * Date: 2018-01-25
  * Time: 14:42
- * Describe: 购物车分类模块,访问网络需要的api
+ * Describe: 购物车分类模块接口
  */
 
 interface CartApi {

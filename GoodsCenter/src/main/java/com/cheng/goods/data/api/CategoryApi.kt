@@ -11,7 +11,7 @@ import rx.Observable
  * User: Cheng
  * Date: 2018-01-11
  * Time: 22:42
- * Describe: Goods分类模块,访问网络需要的api
+ * Describe: Goods分类模块接口
  */
 
 interface CategoryApi {

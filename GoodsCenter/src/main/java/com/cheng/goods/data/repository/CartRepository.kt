@@ -23,7 +23,9 @@ class CartRepository @Inject constructor() {
      * 获取购物车列表
      */
     fun getCartList(): Observable<BaseResponse<MutableList<CartGoodsInfo>?>> {
-        return RetrofitFactory.retrofitFactory.create(CartApi::class.java).getCartList()
+        return RetrofitFactory.retrofitFactory
+                .create(CartApi::class.java)
+                .getCartList()
     }
 
     /**
@@ -31,7 +33,8 @@ class CartRepository @Inject constructor() {
      */
     fun addCart(goodsId: Int, goodsDesc: String, goodsIcon: String, goodsPrice: Long,
                 goodsCount: Int, goodsSku: String): Observable<BaseResponse<Int>> {
-        return RetrofitFactory.retrofitFactory.create(CartApi::class.java)
+        return RetrofitFactory.retrofitFactory
+                .create(CartApi::class.java)
                 .addCart(AddCartRequest(goodsId, goodsDesc, goodsIcon, goodsPrice, goodsCount, goodsSku))
     }
 
@@ -39,15 +42,17 @@ class CartRepository @Inject constructor() {
      * 删除购物车商品
      */
     fun deleteCartList(list: List<Int>): Observable<BaseResponse<String>> {
-        return RetrofitFactory.retrofitFactory.create(CartApi::class.java).deleteCartList(DeleteCartRequest(list))
+        return RetrofitFactory.retrofitFactory
+                .create(CartApi::class.java)
+                .deleteCartList(DeleteCartRequest(list))
     }
 
     /**
      * 购物车结算
      */
     fun submitCart(list: List<CartGoodsInfo>, totalPrice: Long): Observable<BaseResponse<Int>> {
-        return RetrofitFactory.retrofitFactory.create(CartApi::class.java).submitCart(SubmitCartRequest(list, totalPrice))
+        return RetrofitFactory.retrofitFactory
+                .create(CartApi::class.java)
+                .submitCart(SubmitCartRequest(list, totalPrice))
     }
-
-
 }

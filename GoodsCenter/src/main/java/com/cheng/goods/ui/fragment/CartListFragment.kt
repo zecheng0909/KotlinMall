@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.alibaba.android.arouter.launcher.ARouter
 import com.cheng.baselibrary.ext.setVisible
 import com.cheng.baselibrary.ext.startLoading
 import com.cheng.baselibrary.ui.fragment.BaseMvpFragment
@@ -17,6 +18,7 @@ import com.cheng.goods.injection.component.DaggerCartComponent
 import com.cheng.goods.injection.module.CartModule
 import com.cheng.goods.presenter.CartListPresenter
 import com.cheng.goods.presenter.view.CartListView
+import com.cheng.provider.router.RouterPath
 import com.eightbitlab.rxbus.Bus
 import com.eightbitlab.rxbus.registerInBus
 import com.kennyc.view.MultiStateView
@@ -24,6 +26,7 @@ import com.kotlin.base.utils.AppPrefsUtils
 import com.kotlin.base.utils.YuanFenConverter
 import com.kotlin.goods.data.protocol.CartGoodsInfo
 import com.kotlin.goods.ui.adapter.CartGoodsAdapter
+import com.kotlin.provider.common.ProviderConstant
 import kotlinx.android.synthetic.main.fragment_cart.*
 import org.jetbrains.anko.support.v4.toast
 
@@ -53,6 +56,7 @@ class CartListFragment : BaseMvpFragment<CartListPresenter>(), CartListView, Vie
     override fun onStart() {
         super.onStart()
         loadData()
+        allCheckedCb.isChecked = false
     }
 
     /**
@@ -202,7 +206,10 @@ class CartListFragment : BaseMvpFragment<CartListPresenter>(), CartListView, Vie
      * 提交购物车商品的回调
      */
     override fun onSubmitCartListResult(result: Int) {
-        toast("$result")
+        ARouter.getInstance()
+                .build(RouterPath.OrderCenter.PATH_ORDER_CONFIRM)
+                .withInt(ProviderConstant.KEY_ORDER_ID, result)
+                .navigation()
     }
 
     /**

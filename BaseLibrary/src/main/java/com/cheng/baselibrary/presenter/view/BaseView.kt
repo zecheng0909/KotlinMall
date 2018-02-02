@@ -8,6 +8,7 @@ package com.cheng.baselibrary.presenter.view
  */
 
 interface BaseView {
+
     fun showLoading()
 
     fun hideLoading()

@@ -1,6 +1,7 @@
 package com.cheng.baselibrary.ui.activity
 
 import android.os.Bundle
+import com.alibaba.android.arouter.launcher.ARouter
 import com.cheng.baselibrary.common.BaseApplication
 import com.cheng.baselibrary.injection.component.ActivityComponent
 import com.cheng.baselibrary.injection.component.DaggerActivityComponent
@@ -36,6 +37,8 @@ abstract class BaseMvpActivity<T : BasePresenter<*>> : BaseActivity(), BaseView 
         injectComponent()
 
         loadingDialog = ProgressLoading.create(this)
+
+        ARouter.getInstance().inject(this)
     }
 
     override fun showLoading() {

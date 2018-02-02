@@ -12,9 +12,18 @@ object RouterPath {
     /**
      * 登录页
      */
-    class UserCenter{
+    class UserCenter {
         companion object {
             const val PATH_LOGIN = "/userCenter/login"
+        }
+    }
+
+    /**
+     * 订单确认
+     */
+    class OrderCenter {
+        companion object {
+            const val PATH_ORDER_CONFIRM = "/orderCenter/confirm"
         }
     }
 
