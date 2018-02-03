@@ -2,6 +2,7 @@ package com.cheng.order.ui.activity
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.cheng.baselibrary.ui.activity.BaseMvpActivity
@@ -16,6 +17,7 @@ import com.kotlin.order.data.protocol.OrderInfo
 import com.kotlin.order.ui.adapter.OrderGoodsAdapter
 import com.kotlin.provider.common.ProviderConstant
 import kotlinx.android.synthetic.main.activity_order_confirm.*
+import org.jetbrains.anko.startActivity
 
 /**
  * User: Cheng
@@ -25,13 +27,14 @@ import kotlinx.android.synthetic.main.activity_order_confirm.*
  */
 
 @Route(path = RouterPath.OrderCenter.PATH_ORDER_CONFIRM)
-class OrderConfirmActivity : BaseMvpActivity<OrderConfirmPresenter>(), OrderConfirmView {
+class OrderConfirmActivity : BaseMvpActivity<OrderConfirmPresenter>(),
+        OrderConfirmView, View.OnClickListener {
 
     @Autowired(name = ProviderConstant.KEY_ORDER_ID)
     @JvmField
     var orderId: Int = 0
 
-    lateinit var orderGoodsAdapter: OrderGoodsAdapter
+    private lateinit var orderGoodsAdapter: OrderGoodsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +42,15 @@ class OrderConfirmActivity : BaseMvpActivity<OrderConfirmPresenter>(), OrderConf
 
         initView()
         loadData()
+    }
+
+    override fun onClick(v: View?) {
+        when (v) {
+            selectShipTv -> {
+                startActivity<ShipAddressActivity>()
+            }
+        }
+
     }
 
     /**
@@ -52,9 +64,11 @@ class OrderConfirmActivity : BaseMvpActivity<OrderConfirmPresenter>(), OrderConf
      * 初始化视图
      */
     private fun initView() {
-        orderGoodsRv.layoutManager  = LinearLayoutManager(this)
-        orderGoodsAdapter=OrderGoodsAdapter(this)
+        orderGoodsRv.layoutManager = LinearLayoutManager(this)
+        orderGoodsAdapter = OrderGoodsAdapter(this)
         orderGoodsRv.adapter = orderGoodsAdapter
+
+        selectShipTv.setOnClickListener(this)
     }
 
     /**

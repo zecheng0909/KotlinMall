@@ -57,10 +57,11 @@
             style="@style/MeOrderLabelStyle"
             android:drawableTop="@drawable/icon_order"
             android:text="我的订单" />
+
     </LinearLayout>
 
     <TextView
-        android:id="@+id/mAddressTv"
+        android:id="@+id/addressTv"
         style="@style/MeItemStyle"
         android:layout_marginTop="@dimen/common_margin"
         android:background="@drawable/border_all"

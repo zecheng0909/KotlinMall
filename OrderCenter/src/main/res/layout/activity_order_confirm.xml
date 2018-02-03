@@ -9,7 +9,7 @@
         app:titleText="订单确认" />
 
     <TextView
-        android:id="@+id/mSelectShipTv"
+        android:id="@+id/selectShipTv"
         style="@style/MatchWrap"
         android:layout_below="@id/mHeaderBar"
         android:background="@drawable/border_all"
@@ -21,7 +21,7 @@
     <RelativeLayout
         android:id="@+id/mShipView"
         style="@style/MatchWrap"
-        android:layout_below="@id/mSelectShipTv"
+        android:layout_below="@id/selectShipTv"
         android:layout_marginTop="@dimen/common_margin"
         android:background="@drawable/border_all"
         android:paddingBottom="@dimen/common_padding_middle"
@@ -97,4 +97,5 @@
             android:textColor="@color/common_white"
             android:textSize="@dimen/text_big_size" />
     </RelativeLayout>
+
 </RelativeLayout>

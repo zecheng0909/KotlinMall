@@ -5,7 +5,7 @@ import android.os.Parcelable
 
 /**
  * User: Cheng
- * Date: 2018-02-1
+ * Date: 2018-02-01
  * Time: 15:00
  * Describe: 收货地址数据类
  */

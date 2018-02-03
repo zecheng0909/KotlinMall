@@ -20,7 +20,7 @@
         android:paddingTop="@dimen/common_padding_middle">
 
         <TextView
-            android:id="@+id/mSetDefaultTv"
+            android:id="@+id/setDefaultTv"
             style="@style/WrapWrap"
             android:layout_centerVertical="true"
             android:background="@null"
@@ -32,17 +32,17 @@
             android:textColor="@color/text_normal" />
 
         <TextView
-            android:id="@+id/mEditTv"
+            android:id="@+id/editTv"
             style="@style/WrapWrap"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/common_margin"
-            android:layout_toLeftOf="@+id/mDeleteTv"
+            android:layout_toLeftOf="@+id/deleteTv"
             android:gravity="center_vertical"
             android:text="@string/common_edit"
             android:textSize="@dimen/text_small_size" />
 
         <TextView
-            android:id="@+id/mDeleteTv"
+            android:id="@+id/deleteTv"
             style="@style/WrapWrap"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"

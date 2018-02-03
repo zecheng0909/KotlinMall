@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 /**
  * User: Cheng
- * Date: 2018-02-1
+ * Date: 2018-02-01
  * Time: 15:20
  * Describe: 收货地址数据层
  */
@@ -39,7 +39,7 @@ class ShipAddressRepository @Inject constructor() {
     }
 
     /**
-     * 修改收货地址
+     * 修改收货地址信息
      */
     fun editShipAddress(address: ShipAddressInfo): Observable<BaseResponse<String>> {
         return RetrofitFactory.retrofitFactory

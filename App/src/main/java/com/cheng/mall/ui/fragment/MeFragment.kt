@@ -8,6 +8,7 @@ import com.cheng.baselibrary.ext.loadUrl
 import com.cheng.baselibrary.ui.fragment.BaseFragment
 import com.cheng.mall.R
 import com.cheng.mall.ui.activity.SettingActivity
+import com.cheng.order.ui.activity.ShipAddressActivity
 import com.cheng.provider.common.isLogined
 import com.cheng.user.ui.activity.LoginActivity
 import com.cheng.user.ui.activity.UserInfoActivity
@@ -55,6 +56,10 @@ class MeFragment : BaseFragment(), View.OnClickListener {
             settingTv -> {
                 startActivity<SettingActivity>()
             }
+
+            addressTv -> {
+                startActivity<ShipAddressActivity>()
+            }
         }
     }
 
@@ -65,6 +70,7 @@ class MeFragment : BaseFragment(), View.OnClickListener {
         userIconIv.setOnClickListener(this)
         userNameTv.setOnClickListener(this)
         settingTv.setOnClickListener(this)
+        addressTv.setOnClickListener(this)
     }
 
     /**
