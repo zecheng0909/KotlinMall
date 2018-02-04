@@ -8,11 +8,14 @@ import com.cheng.baselibrary.ext.loadUrl
 import com.cheng.baselibrary.ui.fragment.BaseFragment
 import com.cheng.mall.R
 import com.cheng.mall.ui.activity.SettingActivity
+import com.cheng.order.ui.activity.OrderActivity
 import com.cheng.order.ui.activity.ShipAddressActivity
 import com.cheng.provider.common.isLogined
 import com.cheng.user.ui.activity.LoginActivity
 import com.cheng.user.ui.activity.UserInfoActivity
 import com.kotlin.base.utils.AppPrefsUtils
+import com.kotlin.order.common.OrderConstant
+import com.kotlin.order.common.OrderStatus
 import com.kotlin.provider.common.ProviderConstant
 import kotlinx.android.synthetic.main.fragment_me.*
 import org.jetbrains.anko.support.v4.startActivity
@@ -60,6 +63,22 @@ class MeFragment : BaseFragment(), View.OnClickListener {
             addressTv -> {
                 startActivity<ShipAddressActivity>()
             }
+
+            allOrderTv -> {
+                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_ALL)
+            }
+
+            waitPayOrderTv -> {
+                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_WAIT_PAY)
+            }
+
+            waitConfirmOrderTv -> {
+                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_WAIT_CONFIRM)
+            }
+
+            completeOrderTv -> {
+                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_COMPLETED)
+            }
         }
     }
 
@@ -71,6 +90,10 @@ class MeFragment : BaseFragment(), View.OnClickListener {
         userNameTv.setOnClickListener(this)
         settingTv.setOnClickListener(this)
         addressTv.setOnClickListener(this)
+        allOrderTv.setOnClickListener(this)
+        waitPayOrderTv.setOnClickListener(this)
+        waitConfirmOrderTv.setOnClickListener(this)
+        completeOrderTv.setOnClickListener(this)
     }
 
     /**

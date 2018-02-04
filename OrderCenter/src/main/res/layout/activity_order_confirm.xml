@@ -19,7 +19,7 @@
         android:textColor="@color/text_light_dark" />
 
     <RelativeLayout
-        android:id="@+id/mShipView"
+        android:id="@+id/shipView"
         style="@style/MatchWrap"
         android:layout_below="@id/selectShipTv"
         android:layout_marginTop="@dimen/common_margin"
@@ -29,13 +29,13 @@
         android:visibility="gone">
 
         <TextView
-            android:id="@+id/mShipNameTv"
+            android:id="@+id/shipNameTv"
             style="@style/OrderShipName" />
 
         <TextView
-            android:id="@+id/mShipAddressTv"
+            android:id="@+id/shipAddressTv"
             style="@style/OrderShipAddress"
-            android:layout_below="@id/mShipNameTv"
+            android:layout_below="@id/shipNameTv"
             android:background="@null"
             android:paddingBottom="@dimen/common_padding_small" />
 
@@ -51,7 +51,7 @@
         android:id="@+id/orderGoodsRv"
         style="@style/commonRecyclerView"
         android:layout_height="wrap_content"
-        android:layout_below="@id/mShipView"
+        android:layout_below="@id/shipView"
         android:layout_marginTop="@dimen/common_margin" />
 
     <RelativeLayout
@@ -87,7 +87,7 @@
             android:textColor="@color/common_red" />
 
         <Button
-            android:id="@+id/mSubmitOrderBtn"
+            android:id="@+id/submitOrderBtn"
             style="@style/WrapWrap"
             android:layout_alignParentRight="true"
             android:background="@color/common_red"

@@ -5,19 +5,24 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.cheng.baselibrary.ext.setVisible
 import com.cheng.baselibrary.ui.activity.BaseMvpActivity
 import com.cheng.order.R
+import com.cheng.order.event.UpDateAddressEvent
 import com.cheng.order.injection.component.DaggerOrderComponent
 import com.cheng.order.injection.module.OrderModule
 import com.cheng.order.presenter.OrderConfirmPresenter
 import com.cheng.order.presenter.view.OrderConfirmView
 import com.cheng.provider.router.RouterPath
+import com.eightbitlab.rxbus.Bus
+import com.eightbitlab.rxbus.registerInBus
 import com.kotlin.base.utils.YuanFenConverter
 import com.kotlin.order.data.protocol.OrderInfo
 import com.kotlin.order.ui.adapter.OrderGoodsAdapter
 import com.kotlin.provider.common.ProviderConstant
 import kotlinx.android.synthetic.main.activity_order_confirm.*
 import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.toast
 
 /**
  * User: Cheng
@@ -36,18 +41,41 @@ class OrderConfirmActivity : BaseMvpActivity<OrderConfirmPresenter>(),
 
     private lateinit var orderGoodsAdapter: OrderGoodsAdapter
 
+    private var orderInfo: OrderInfo? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order_confirm)
 
         initView()
+        initObserve()
         loadData()
+    }
+
+    /**
+     * 更新地址显示状态
+     */
+    private fun upDateAddressView() {
+        val address = orderInfo!!.shipAddress
+        if (address != null) {
+            shipView.setVisible(true)
+            selectShipTv.setVisible(false)
+            shipNameTv.text = address.shipUserName
+            shipAddressTv.text = address.shipAddress
+        } else {
+            shipView.setVisible(false)
+            selectShipTv.setVisible(true)
+        }
     }
 
     override fun onClick(v: View?) {
         when (v) {
-            selectShipTv -> {
+            shipView, selectShipTv -> {
                 startActivity<ShipAddressActivity>()
+            }
+
+            submitOrderBtn -> {
+                mPresenter.submitOrder(orderInfo!!)
             }
         }
 
@@ -69,14 +97,41 @@ class OrderConfirmActivity : BaseMvpActivity<OrderConfirmPresenter>(),
         orderGoodsRv.adapter = orderGoodsAdapter
 
         selectShipTv.setOnClickListener(this)
+        shipView.setOnClickListener(this)
+        submitOrderBtn.setOnClickListener(this)
+    }
+
+    /**
+     * 初始化接收选择收货地址事件
+     */
+    private fun initObserve() {
+        Bus.observe<UpDateAddressEvent>()
+                .subscribe {
+                    orderInfo?.shipAddress = it.addressInfo
+                    upDateAddressView()
+                }
+                .registerInBus(this)
     }
 
     /**
      * 获取订单数据的回调
      */
-    override fun onGetOrderByIdResult(orderInfo: OrderInfo) {
-        totalPriceTv.text = "合计:${YuanFenConverter.changeF2Y(orderInfo.totalPrice)}"
-        orderGoodsAdapter.setData(orderInfo.orderGoodsList)
+    override fun onGetOrderByIdResult(result: OrderInfo) {
+        totalPriceTv.text = "合计:${YuanFenConverter.changeF2Y(result.totalPrice)}"
+        orderGoodsAdapter.setData(result.orderGoodsList)
+        orderInfo = result
+        upDateAddressView()
+    }
+
+    /**
+     * 提交订单的回调
+     */
+    override fun onSubmitOrderResult(result: Boolean) {
+        if (result) {
+            toast("提交成功")
+        } else {
+            toast("提交失败")
+        }
     }
 
     /**
@@ -91,4 +146,8 @@ class OrderConfirmActivity : BaseMvpActivity<OrderConfirmPresenter>(),
         mPresenter.mView = this
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        Bus.unregister(this)
+    }
 }

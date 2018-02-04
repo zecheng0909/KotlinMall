@@ -19,7 +19,7 @@
             android:textColor="@color/text_light_dark" />
 
         <TextView
-            android:id="@+id/mOrderStatusNameTv"
+            android:id="@+id/rrderStatusNameTv"
             style="@style/WrapWrap"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
@@ -28,18 +28,18 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/mMultiGoodsView"
+        android:id="@+id/multiGoodsView"
         style="@style/MatchWrap.Horizontal"
         android:background="@color/common_bg"
         android:visibility="gone" />
 
     <RelativeLayout
-        android:id="@+id/mSingleGoodsView"
+        android:id="@+id/singleGoodsView"
         style="@style/MatchWrap.Common"
         android:padding="@dimen/common_padding_small">
 
         <ImageView
-            android:id="@+id/mGoodsIconIv"
+            android:id="@+id/goodsIconIv"
             android:layout_width="@dimen/common_icon_width"
             android:layout_height="@dimen/common_icon_height"
             android:layout_centerVertical="true"
@@ -47,32 +47,32 @@
             android:scaleType="fitXY" />
 
         <TextView
-            android:id="@+id/mGoodsDescTv"
+            android:id="@+id/goodsDescTv"
             style="@style/WrapWrap"
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="@dimen/common_margin"
-            android:layout_toRightOf="@id/mGoodsIconIv"
+            android:layout_toRightOf="@id/goodsIconIv"
             android:textSize="@dimen/text_small_size" />
 
         <TextView
-            android:id="@+id/mGoodsPriceTv"
+            android:id="@+id/goodsPriceTv"
             style="@style/MatchWrap"
-            android:layout_alignLeft="@id/mGoodsDescTv"
-            android:layout_below="@id/mGoodsDescTv"
+            android:layout_alignLeft="@id/goodsDescTv"
+            android:layout_below="@id/goodsDescTv"
             android:layout_marginTop="@dimen/common_margin_small"
             android:textColor="@color/common_red" />
 
         <TextView
-            android:id="@+id/mGoodsCountTv"
+            android:id="@+id/goodsCountTv"
             style="@style/WrapWrap"
             android:layout_alignParentRight="true"
-            android:layout_alignTop="@id/mGoodsPriceTv"
+            android:layout_alignTop="@id/goodsPriceTv"
             android:textColor="@color/text_dark"
             android:textSize="@dimen/text_small_size" />
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/mOrderInfoTv"
+        android:id="@+id/orderInfoTv"
         style="@style/MatchWrap"
         android:background="@drawable/border_bottom"
         android:gravity="right"
@@ -87,7 +87,7 @@
         android:padding="@dimen/common_padding_small">
 
         <Button
-            android:id="@+id/mConfirmBtn"
+            android:id="@+id/confirmBtn"
             android:layout_width="wrap_content"
             android:layout_height="30dip"
             android:layout_marginRight="@dimen/common_margin"
@@ -97,7 +97,7 @@
             android:textSize="@dimen/text_small_size" />
 
         <Button
-            android:id="@+id/mPayBtn"
+            android:id="@+id/payBtn"
             android:layout_width="wrap_content"
             android:layout_height="30.0dip"
             android:layout_marginRight="@dimen/common_margin"
@@ -107,7 +107,7 @@
             android:textSize="@dimen/text_small_size" />
 
         <Button
-            android:id="@+id/mCancelBtn"
+            android:id="@+id/cancelBtn"
             android:layout_width="wrap_content"
             android:layout_height="30.0dip"
             android:background="@drawable/corner_gray_white_bg"

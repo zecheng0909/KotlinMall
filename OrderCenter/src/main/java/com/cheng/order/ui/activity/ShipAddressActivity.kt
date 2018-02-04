@@ -7,11 +7,14 @@ import com.bigkoo.alertview.OnItemClickListener
 import com.cheng.baselibrary.ext.onClick
 import com.cheng.baselibrary.ui.activity.BaseMvpActivity
 import com.cheng.order.R
+import com.cheng.order.event.UpDateAddressEvent
 import com.cheng.order.injection.component.DaggerShipAddressComponent
 import com.cheng.order.injection.module.ShipAddressModule
 import com.cheng.order.presenter.ShipAddressPresenter
 import com.cheng.order.presenter.view.ShipAddressView
+import com.eightbitlab.rxbus.Bus
 import com.kennyc.view.MultiStateView
+import com.kotlin.base.ui.adapter.BaseRecyclerViewAdapter
 import com.kotlin.order.common.OrderConstant
 import com.kotlin.order.data.protocol.ShipAddressInfo
 import com.kotlin.order.ui.adapter.ShipAddressAdapter
@@ -72,6 +75,14 @@ class ShipAddressActivity : BaseMvpActivity<ShipAddressPresenter>(), ShipAddress
 
             override fun onSetDefault(item: ShipAddressInfo) {
                 mPresenter.setDefaultShipAddress(address = item)
+            }
+        })
+
+        shipAddressAdapter.setOnItemClickListener(object :
+                BaseRecyclerViewAdapter.OnItemClickListener<ShipAddressInfo> {
+            override fun onItemClick(item: ShipAddressInfo, position: Int) {
+                Bus.send(UpDateAddressEvent(item))
+                finish()
             }
         })
     }

@@ -37,4 +37,21 @@ class OrderConfirmPresenter @Inject constructor() : BasePresenter<OrderConfirmVi
                 }, lifecycleProvider)
     }
 
+    /**
+     * 提交订单
+     */
+    fun submitOrder(order: OrderInfo) {
+        if (!checkNerWork()) {
+            return
+        }
+        mView.showLoading()
+        orderService.submitOrder(order = order)
+                .execute(object : BaseSubscriber<Boolean>(mView) {
+                    override fun onNext(t: Boolean) {
+                        super.onNext(t)
+                        mView.onSubmitOrderResult(t)
+                    }
+                }, lifecycleProvider)
+    }
+
 }

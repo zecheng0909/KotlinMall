@@ -14,4 +14,8 @@ interface OrderService {
 
     fun getOrderById(orderId: Int): Observable<OrderInfo>
 
+
+    fun getOrderList(orderStatus: Int): Observable<MutableList<OrderInfo>?>
+
+    fun submitOrder(order: OrderInfo): Observable<Boolean>
 }

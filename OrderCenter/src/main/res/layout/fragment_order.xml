@@ -3,12 +3,12 @@
     style="@style/MatchMatch.Vertical.Common">
 
     <com.kennyc.view.MultiStateView
-        android:id="@+id/mMultiStateView"
+        android:id="@+id/multiStateView"
         style="@style/MultiStateStyle"
         android:layout_below="@id/mHeaderBar">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/mOrderRv"
+            android:id="@+id/orderRv"
             style="@style/commonRecyclerView" />
 
     </com.kennyc.view.MultiStateView>
