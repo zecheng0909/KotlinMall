@@ -17,7 +17,7 @@ import com.kotlin.order.common.OrderConstant
 
 class OrderVpAdapter(fm: FragmentManager, context: Context) : FragmentPagerAdapter(fm) {
 
-    private val titles = arrayOf("全部", "代付款", "待收货", "已完成", "已取消")
+    private val titles = arrayOf("全部", "待付款", "待收货", "已完成", "已取消")
 
     override fun getItem(position: Int): Fragment {
         val fragment = OrderFragment()

@@ -12,5 +12,9 @@ import com.kotlin.order.data.protocol.OrderInfo
 
 interface OrderListView : BaseView {
 
-    fun onGetOrderListResult(result:MutableList<OrderInfo>?)
+    fun onGetOrderListResult(result: MutableList<OrderInfo>?)
+
+    fun onConfirmOrderResult(result: Boolean)
+
+    fun onCancelOrderResult(result: Boolean)
 }

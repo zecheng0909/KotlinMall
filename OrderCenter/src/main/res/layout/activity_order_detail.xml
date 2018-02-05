@@ -27,17 +27,17 @@
                 android:text="配送信息" />
 
             <com.kotlin.base.widgets.LabelTextView
-                android:id="@+id/mShipNameTv"
+                android:id="@+id/shipNameTv"
                 style="@style/MatchWrap"
                 app:labelText="收货人:" />
 
             <com.kotlin.base.widgets.LabelTextView
-                android:id="@+id/mShipMobileTv"
+                android:id="@+id/shipMobileTv"
                 style="@style/MatchWrap"
                 app:labelText="收货电话:" />
 
             <com.kotlin.base.widgets.LabelTextView
-                android:id="@+id/mShipAddressTv"
+                android:id="@+id/shipAddressTv"
                 style="@style/MatchWrap"
                 app:labelText="收货地址:" />
 
@@ -66,7 +66,7 @@
                 app:contentText="支付宝支付" />
 
             <com.kotlin.base.widgets.LabelTextView
-                android:id="@+id/mTotalPriceTv"
+                android:id="@+id/totalPriceTv"
                 style="@style/MatchWrap"
                 app:labelText="实付费用:" />
 
@@ -83,10 +83,17 @@
                 android:drawableLeft="@drawable/icon_shop"
                 android:drawablePadding="@dimen/common_padding_small" />
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:descendantFocusability="blocksDescendants">
+
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/mOrderGoodsRv"
+                android:id="@+id/orderGoodsRv"
                 android:layout_height="wrap_content"
                 style="@style/commonRecyclerView" />
+
+            </RelativeLayout>
 
         </LinearLayout>
 

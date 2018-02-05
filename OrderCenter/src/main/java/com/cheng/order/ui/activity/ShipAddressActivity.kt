@@ -91,7 +91,7 @@ class ShipAddressActivity : BaseMvpActivity<ShipAddressPresenter>(), ShipAddress
      * 弹出对话框,选择是否删除收货地址
      */
     private fun deleteShipAddress(id: Int) {
-        AlertView("是否删除该收货地址", null, "取消", null, arrayOf("删除"), this, AlertView.Style.ActionSheet,
+        AlertView("是否删除该收货地址", null, "取消", null, arrayOf("删除"), this, AlertView.Style.Alert,
                 OnItemClickListener { _, position ->
                     if (position == 0) {
                         mPresenter.deleteShipAddress(id = id)

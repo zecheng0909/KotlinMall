@@ -31,4 +31,13 @@ class OrderServiceImpl @Inject constructor() : OrderService {
     override fun submitOrder(order: OrderInfo): Observable<Boolean> {
         return orderRepository.submitOrder(order = order).convertBoolean()
     }
+
+    override fun confirmOrder(orderId: Int): Observable<Boolean> {
+        return orderRepository.confirmOrder(orderId = orderId).convertBoolean()
+    }
+
+    override fun cancelOrder(orderId: Int): Observable<Boolean> {
+        return orderRepository.cancelOrder(orderId = orderId).convertBoolean()
+    }
+
 }

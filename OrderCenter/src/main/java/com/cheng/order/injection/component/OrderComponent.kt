@@ -4,6 +4,7 @@ import com.cheng.baselibrary.injection.PerComponentScope
 import com.cheng.baselibrary.injection.component.ActivityComponent
 import com.cheng.order.injection.module.OrderModule
 import com.cheng.order.ui.activity.OrderConfirmActivity
+import com.cheng.order.ui.activity.OrderDetailActivity
 import com.cheng.order.ui.fragment.OrderFragment
 import dagger.Component
 
@@ -21,5 +22,7 @@ interface OrderComponent {
     fun inject(activity: OrderConfirmActivity)
 
     fun inject(fragment: OrderFragment)
+
+    fun inject(activity: OrderDetailActivity)
 
 }

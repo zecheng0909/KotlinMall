@@ -68,15 +68,27 @@ class OrderAdapter(context: Context) : BaseRecyclerViewAdapter<OrderInfo, OrderA
 
         when (model.orderStatus) {
             OrderStatus.ORDER_WAIT_PAY -> {
-                setOptVisible(false,true,true,holder)
+                holder.itemView.orderStatusNameTv.text = "待支付"
+                holder.itemView.orderStatusNameTv.setTextColor(mContext.resources.getColor(R.color.common_red))
+                setOptVisible(false, true, true, holder)
             }
 
             OrderStatus.ORDER_WAIT_CONFIRM -> {
-                setOptVisible(true,false,true,holder)
+                holder.itemView.orderStatusNameTv.text = "待收货"
+                holder.itemView.orderStatusNameTv.setTextColor(mContext.resources.getColor(R.color.common_blue))
+                setOptVisible(true, false, true, holder)
             }
 
-            OrderStatus.ORDER_COMPLETED, OrderStatus.ORDER_CANCELED -> {
-                setOptVisible(false,false,false,holder)
+            OrderStatus.ORDER_COMPLETED -> {
+                holder.itemView.orderStatusNameTv.text = "已完成"
+                holder.itemView.orderStatusNameTv.setTextColor(mContext.resources.getColor(R.color.common_yellow))
+                setOptVisible(false, false, false, holder)
+            }
+
+            OrderStatus.ORDER_CANCELED -> {
+                holder.itemView.orderStatusNameTv.text = "已取消"
+                holder.itemView.orderStatusNameTv.setTextColor(mContext.resources.getColor(R.color.common_gray))
+                setOptVisible(false, false, false, holder)
             }
         }
 
@@ -105,6 +117,12 @@ class OrderAdapter(context: Context) : BaseRecyclerViewAdapter<OrderInfo, OrderA
         holder.itemView.confirmBtn.setVisible(confirmViewVisible)
         holder.itemView.payBtn.setVisible(payViewVisible)
         holder.itemView.cancelBtn.setVisible(cancelViewVisible)
+
+        if (confirmViewVisible or payViewVisible or cancelViewVisible) {
+            holder.itemView.bottomView.setVisible(true)
+        } else {
+            holder.itemView.bottomView.setVisible(false)
+        }
     }
 
     fun setOnOptClickListener(onOptClickListener: OnOptClickListener) {

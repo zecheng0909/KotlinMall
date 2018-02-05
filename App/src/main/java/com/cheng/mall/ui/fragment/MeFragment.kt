@@ -10,6 +10,7 @@ import com.cheng.mall.R
 import com.cheng.mall.ui.activity.SettingActivity
 import com.cheng.order.ui.activity.OrderActivity
 import com.cheng.order.ui.activity.ShipAddressActivity
+import com.cheng.provider.common.afterLogin
 import com.cheng.provider.common.isLogined
 import com.cheng.user.ui.activity.LoginActivity
 import com.cheng.user.ui.activity.UserInfoActivity
@@ -65,20 +66,29 @@ class MeFragment : BaseFragment(), View.OnClickListener {
             }
 
             allOrderTv -> {
-                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_ALL)
+                goToOrderActivity(OrderStatus.ORDER_ALL)
             }
 
             waitPayOrderTv -> {
-                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_WAIT_PAY)
+                goToOrderActivity(OrderStatus.ORDER_WAIT_PAY)
             }
 
             waitConfirmOrderTv -> {
-                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_WAIT_CONFIRM)
+                goToOrderActivity(OrderStatus.ORDER_WAIT_CONFIRM)
             }
 
             completeOrderTv -> {
-                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_COMPLETED)
+                goToOrderActivity(OrderStatus.ORDER_COMPLETED)
             }
+        }
+    }
+
+    /**
+     * 跳转至订单列表页
+     */
+    private fun goToOrderActivity(orderStatus: Int) {
+        afterLogin {
+            startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to orderStatus)
         }
     }
 

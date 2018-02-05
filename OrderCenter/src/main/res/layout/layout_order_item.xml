@@ -19,7 +19,7 @@
             android:textColor="@color/text_light_dark" />
 
         <TextView
-            android:id="@+id/rrderStatusNameTv"
+            android:id="@+id/orderStatusNameTv"
             style="@style/WrapWrap"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
@@ -80,7 +80,7 @@
         android:textSize="@dimen/text_small_size" />
 
     <LinearLayout
-        android:id="@+id/mBottomView"
+        android:id="@+id/bottomView"
         style="@style/MatchWrap.Horizontal"
         android:background="@color/common_white"
         android:gravity="right"
